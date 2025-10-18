@@ -1,16 +1,14 @@
-[
-{
-  "modid": "${modid}",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
-  "version": "${version}",
+[{
+  "modid": "${mod_id}",
+  "name": "Lumi's Lots",
+  "description": "Just things I deemed important enough to add.",
+  "version": "${mod_version}",
   "mcversion": "${minecraft_version}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
+  "authorList": ["LumiLovesYou"],
   "credits": "The Forge and FML guys, for making this example",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
-}
-]
+}]

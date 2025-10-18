@@ -1,8 +1,8 @@
 {
     "required": true,
     "minVersion": "0.6",
-    "package": "${package}.mixin",
-    "refmap": "${modid}.mixin.refmap.json",
+    "package": "com.lumi.lots.mixin",
+    "refmap": "lumis_lots.mixin.refmap.json",
     "compatibilityLevel": "JAVA_8",
     "mixins": [
         "ExampleMixin"

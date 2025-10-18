@@ -1,6 +1,7 @@
 /** The root of the build. Exposed for flexibility, but you shouldn't edit it
     unless you have to. Edit project.gradle instead. */
 
+
 buildscript {
     repositories {
         mavenCentral()
@@ -29,6 +30,15 @@ if(project.enable_lombok.toBoolean()) {
     dependencies {
         compileOnly 'org.projectlombok:lombok:1.18.4'
     }
+}
+
+jar {
+    manifest {
+        attributes 'FMLCorePluginContainsFMLMod': 'true'
+    }
+    exclude 'META-INF/*.SF'
+    exclude 'META-INF/*.DSA'
+    exclude 'META-INF/*.RSA'
 }
 
 apply from: "buildscript/forge-1.7.gradle"

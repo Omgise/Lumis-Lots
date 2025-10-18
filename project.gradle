@@ -1,1 +1,2 @@
 // Put your project-specific buildscript code in this file
+// export JAVA_HOME=$(/usr/libexec/java_home -v 1.8) //Keep this safe please <3

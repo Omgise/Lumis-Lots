@@ -25,12 +25,12 @@ dependencies {
     }
 }
 
-ext.outRefMapFile = "${tasks.compileJava.temporaryDir}/${project.modid}.mixin.refmap.json"
+ext.outRefMapFile = "${tasks.compileJava.temporaryDir}/${project.mod_id}.mixin.refmap.json"
 
 jar {
     manifest {
         attributes (
-            'MixinConfigs': "${project.modid}.mixin.json",
+            'MixinConfigs': "${project.mod_id}.mixin.json",
             'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
             'TweakOrder': 0,
             
