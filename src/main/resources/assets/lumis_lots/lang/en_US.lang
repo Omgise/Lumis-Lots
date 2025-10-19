@@ -1,1 +1,3 @@
-tile.testBlock.name=Test Block
+tile.test_block.name=Test Block
+tile.composting_dirt.name=Composting Dirt
+tile.composted_dirt.name=Composted Dirt
