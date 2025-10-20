@@ -1,9 +1,9 @@
 [{
-  "modid": "${mod_id}",
+  "modid": "lumis_lots",
   "name": "Lumi's Lots",
   "description": "Just things I deemed important enough to add.",
-  "version": "${mod_version}",
-  "mcversion": "${minecraft_version}",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
   "authorList": ["LumiLovesYou"],
