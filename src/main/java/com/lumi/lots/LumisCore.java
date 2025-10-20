@@ -51,16 +51,19 @@ public class LumisCore
                 .setName("Test Block")
                 .setMaterial(7)
                 .setSound(1)
+                .setTab(0)
                 .build();
         trueBlock = new BlockBuilder()
                 .setName("True Block")
                 .setMaterial(7)
                 .setSound(1)
+                .setTab(0)
                 .build();
         falseBlock = new BlockBuilder()
                 .setName("False Block")
                 .setMaterial(7)
                 .setSound(1)
+                .setTab(0)
                 .build();
 
         compostingDirt = new BlockBuilder()

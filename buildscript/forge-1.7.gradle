@@ -51,10 +51,6 @@ configurations {
     compile.extendsFrom(shade)
 }
 
-if(project.enable_mixin.toBoolean()) {
-    apply from: "buildscript/forge-1.7-mixin.gradle"
-}
-
 project.ext.override_dependencies = false
 
 apply from: "project.gradle"
