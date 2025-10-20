@@ -29,8 +29,7 @@ public class LumisCore
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
-        // some example code
-        System.out.println("DIRT BLOCK >> "+Blocks.dirt.getUnlocalizedName());
+        System.out.println("Lumi says \"Hello Forge world!\"");
     }
 
     @Mod.Instance(MOD_ID)
@@ -120,8 +119,6 @@ public class LumisCore
                             drops.add(new ItemStack(Items.dye, 1, 15));
                         }
                         return drops;
-
-                        /* value = random.randint(3,5) + math.floor(fortune*1.5) */
                     }
                 })
                 .build();
@@ -134,13 +131,13 @@ public class LumisCore
         GameRegistry.registerBlock(compostedDirt, "composted_dirt");
 
         //Tags
-        Block[] compostableBlocks = {Blocks.pumpkin, Blocks.melon_block, Blocks.cactus, Blocks.hay_block, Blocks.vine, Blocks.waterlily, Blocks.sapling, Blocks.leaves, Blocks.leaves2, Blocks.double_plant, Blocks.tallgrass, Blocks.red_mushroom, Blocks.brown_mushroom, Blocks.reeds, Blocks.nether_wart, Blocks.red_flower};
-        for (int i = 0; i < compostableBlocks.length; i++) {
-            OreDictionary.registerOre("compostable", new ItemStack(compostableBlocks[i], 1, OreDictionary.WILDCARD_VALUE));
+        Block[] compostableBlocks = {Blocks.pumpkin, Blocks.melon_block, Blocks.cactus, Blocks.hay_block, Blocks.vine, Blocks.waterlily, Blocks.sapling, Blocks.leaves, Blocks.leaves2, Blocks.double_plant, Blocks.tallgrass, Blocks.red_mushroom, Blocks.brown_mushroom, Blocks.reeds, Blocks.nether_wart, Blocks.red_flower, Blocks.yellow_flower};
+        for (Block block : compostableBlocks) {
+            OreDictionary.registerOre("compostable", new ItemStack(block, 1, OreDictionary.WILDCARD_VALUE));
         }
         Item[] compostableItems = {Items.rotten_flesh, Items.apple, Items.bread, Items.fish, Items.chicken, Items.porkchop, Items.beef, Items.egg, Items.wheat, Items.wheat_seeds, Items.melon_seeds, Items.pumpkin_seeds, Items.melon, Items.potato, Items.baked_potato};
-        for (int i = 0; i < compostableItems.length; i++) {
-            OreDictionary.registerOre("compostable", new ItemStack(compostableItems[i], 1, OreDictionary.WILDCARD_VALUE));
+        for (Item item : compostableItems) {
+            OreDictionary.registerOre("compostable", new ItemStack(item, 1, OreDictionary.WILDCARD_VALUE));
         }
 
         //Recipes
