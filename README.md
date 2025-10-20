@@ -1,25 +1,103 @@
-# Forge 1.7.10 example project
+<div align="center"><center>
 
-This is an example Forge 1.7.10 mod template that can be used to quickstart your modding projects. It comes with [CodeChickenLib](https://github.com/Chicken-Bones/CodeChickenCore) and (optionally) [Mixin](https://github.com/SpongePowered/Mixin) already set up.
+<img src="https://raw.githubusercontent.com/lumilovesyou/Lumis-Lots/refs/heads/master/src/main/resources/icon.png" style="border-radius: 10px;">
 
-## How to use this example project
+# Lumi's Lots
 
-1. Press the **"Use this template"** button above to create a GitHub project and clone it to your machine. You can also clone this repo, which will keep the template's history. *You shouldn't fork this repo if you're using it to create a mod project, because forked repositories have various disadvantages on GitHub.*
-3. Configure the project in `gradle.properties`. You can set whether you want to use mixins or not here.
-4. Run `py init_project.py` to generate the project files. This script automatically substitutes your metadata into the source files, and deletes itself and this readme once it's done.
-5. Run `./gradlew setupDecompWorkspace eclipse` (you can use `idea` instead of `eclipse`)
-6. Now you can open the project in your IDE. Don't forget to edit the mod info in `mcmod.info`. Happy coding!
+*Just things I deemed important enough to add.*
 
-### Running in Eclipse
-ForgeGradle 1.2 doesn't generate launch configurations for Eclipse. To get them, copy the launch configuration of another mod and correct the paths in them. If this is the first mod in your workspace, you can use the [1.12.2 MDK's](https://files.minecraftforge.net/net/minecraftforge/forge/index_1.12.2.html) project as the seed. Download it, run `gradlew eclipse`, and copy the generated `.launch` files into your project. It's convoluted, but it's the easiest way I know.
+Backports and reworks modern features while adding new features to 1.7.10.
+</center></div>
 
-### Tips
+## Features
 
-* CodeChickenLib is included in the dependencies, so you can get other non-deobfuscated mods running in your dev environment by putting them either in the `libs` directory you create inside this one (you'll have to run `./gradlew eclipse` (or `idea`)  again whenever you change that directory), or in the `mods` folder of your instance.
-* Once you're done, build your project with `./gradlew build`.
-* Useful arguments in IDEs:
-    * Program arguments to get your mixins working: `--tweakClass org.spongepowered.asm.launch.MixinTweaker --mixin <your.mixin.json>`
-    * JVM arguments for if you're writing a coremod: `-Dfml.coreMods.load=<your.coremod.Plugin>`
+### Developer/Creative Features
+<ol>
+    <li>
+        <details>
+        <summary>Test Block</summary>
+        Used only for testing in development.<br>
+        ID: <code>lumis_lots:test_block</code> <br>
+        <img src="./readme/test_block.png">
+        </details>
+    </li>
+    <li>
+        <details>
+        <summary>True Block</summary>
+        Used only for testing in development.<br>
+        ID: <code>lumis_lots:true_block</code> <br>
+        <img src="./readme/true_block.png">
+        </details>
+    </li>
+    <li>
+        <details>
+        <summary>False Block</summary>
+        Used only for testing in development.<br>
+        ID: <code>lumis_lots:false_block</code> <br>
+        <img src="./readme/false_block.png">
+        </details>
+    </li>
+</ol>
 
-## Credits
-This repo is a fork of https://github.com/anatawa12/ForgeGradle-example which itself is based on the [Forge 1.7.10 MDK](https://files.minecraftforge.net/net/minecraftforge/forge/index_1.7.10.html) -- this repo contains some code from both projects.
+### Backported/Reworked Features
+<ol>
+    <li>
+        <details>
+        <summary>Composting Dirt</summary>
+        Crafted from dirt and eight compostable items.<br>
+        ID: <code>lumis_lots:composting_dirt</code> <br>
+        <img src="./readme/composting_dirt.png">
+        </details>
+    </li>
+    <li>
+        <details>
+        <summary>Composted Dirt</summary>
+        A result of letting composting dirt sit.<br>
+        ID: <code>lumis_lots:composted_dirt</code> <br>
+        <img src="./readme/composted_dirt.png">
+        </details>
+    </li>
+</ol>
+
+## Gameplay guide
+### Compost
+Composting dirt can be crafted by placing eight compostable items around a block of dirt. Once placed down it will begin to age into composted dirt, a process which can be sped up by placing a water source nearby. Once aged into composted dirt it can be broken to drop 3-5 bonemeal and a block of dirt. If you're using fortune bonemeal drops follow the formula <code>Drop rate = Y * ⌊1.5 * Fortune level⌋, Y ∈ {3, 4, 5}</code>.
+<img src="./readme/composting_dirt_recipe.png" style="border-radius: 10px;">
+<details>
+<summary>Compostable items</summary>
+<ul>
+<li>Apples,</li>
+<li>Baked Potatoes,</li>
+<li>Bread,</li>
+<li>Brown Mushrooms,</li>
+<li>Cacti,</li>
+<li>Eggs,</li>
+<li>Fish,</li>
+<li>Flowers,</li>
+<li>Grass,</li>
+<li>Hay Blocks,</li>
+<li>Leaves,</li>
+<li>Lily Pads,</li>
+<li>Melon Blocks,</li>
+<li>Melon Seeds,</li>
+<li>Melon Slices,</li>
+<li>Nether Wart,</li>
+<li>Potatoes,</li>
+<li>Pumpkins,</li>
+<li>Pumpkin Seeds,</li>
+<li>Raw Beefs,</li>
+<li>Raw Chickens,</li>
+<li>Raw Porkchops,</li>
+<li>Red Mushrooms,</li>
+<li>Rotten Flesh,</li>
+<li>Saplings,</li>
+<li>Sugar Cane,</li>
+<li>Vines,</li>
+<li>Wheat Seeds,</li>
+<li>Wheat</li>
+</ul>
+</details>
+
+## How to use
+
+Simply add this mod to your game's `mods` folder.

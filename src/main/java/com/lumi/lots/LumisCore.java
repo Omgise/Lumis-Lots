@@ -115,6 +115,7 @@ public class LumisCore
                     @Override
                     public ArrayList<ItemStack> onGetMultiDropItems(World world, int x, int y, int z, int metadata, int fortune) {
                         ArrayList<ItemStack> drops = new ArrayList<>();
+                        drops.add(new ItemStack(Blocks.dirt, 1, 0));
                         for (int i = 0; i < ((3 + world.rand.nextInt(3)) + Math.floor(fortune*1.5)); i++) {
                             drops.add(new ItemStack(Items.dye, 1, 15));
                         }
@@ -131,11 +132,11 @@ public class LumisCore
         GameRegistry.registerBlock(compostedDirt, "composted_dirt");
 
         //Tags
-        Block[] compostableBlocks = {Blocks.pumpkin, Blocks.melon_block, Blocks.cactus, Blocks.hay_block, Blocks.vine, Blocks.waterlily, Blocks.sapling, Blocks.leaves, Blocks.leaves2, Blocks.double_plant, Blocks.tallgrass, Blocks.red_mushroom, Blocks.brown_mushroom, Blocks.reeds, Blocks.nether_wart, Blocks.red_flower, Blocks.yellow_flower};
+        Block[] compostableBlocks = {Blocks.pumpkin, Blocks.melon_block, Blocks.cactus, Blocks.hay_block, Blocks.vine, Blocks.waterlily, Blocks.sapling, Blocks.leaves, Blocks.leaves2, Blocks.double_plant, Blocks.tallgrass, Blocks.red_mushroom, Blocks.brown_mushroom, Blocks.nether_wart, Blocks.red_flower, Blocks.yellow_flower};
         for (Block block : compostableBlocks) {
             OreDictionary.registerOre("compostable", new ItemStack(block, 1, OreDictionary.WILDCARD_VALUE));
         }
-        Item[] compostableItems = {Items.rotten_flesh, Items.apple, Items.bread, Items.fish, Items.chicken, Items.porkchop, Items.beef, Items.egg, Items.wheat, Items.wheat_seeds, Items.melon_seeds, Items.pumpkin_seeds, Items.melon, Items.potato, Items.baked_potato};
+        Item[] compostableItems = {Items.rotten_flesh, Items.apple, Items.bread, Items.fish, Items.chicken, Items.porkchop, Items.beef, Items.egg, Items.wheat, Items.wheat_seeds, Items.melon_seeds, Items.pumpkin_seeds, Items.melon, Items.potato, Items.baked_potato, Items.reeds};
         for (Item item : compostableItems) {
             OreDictionary.registerOre("compostable", new ItemStack(item, 1, OreDictionary.WILDCARD_VALUE));
         }
