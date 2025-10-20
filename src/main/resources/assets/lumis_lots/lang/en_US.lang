@@ -1,3 +1,5 @@
 tile.test_block.name=Test Block
+tile.false_block.name=False Block
+tile.true_block.name=True Block
 tile.composting_dirt.name=Composting Dirt
 tile.composted_dirt.name=Composted Dirt
