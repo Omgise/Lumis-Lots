@@ -18,7 +18,7 @@ Backports and reworks modern features while adding new features to 1.7.10.
         <summary>Test Block</summary>
         Used only for testing in development.<br>
         ID: <code>lumis_lots:test_block</code> <br>
-        <img src="./readme/test_block.png">
+        <img src="https://raw.githubusercontent.com/lumilovesyou/Lumis-Lots/refs/heads/master/readme/test_block.png">
         </details>
     </li>
     <li>
@@ -26,7 +26,7 @@ Backports and reworks modern features while adding new features to 1.7.10.
         <summary>True Block</summary>
         Used only for testing in development.<br>
         ID: <code>lumis_lots:true_block</code> <br>
-        <img src="./readme/true_block.png">
+        <img src="https://raw.githubusercontent.com/lumilovesyou/Lumis-Lots/refs/heads/master/readme/true_block.png">
         </details>
     </li>
     <li>
@@ -34,7 +34,7 @@ Backports and reworks modern features while adding new features to 1.7.10.
         <summary>False Block</summary>
         Used only for testing in development.<br>
         ID: <code>lumis_lots:false_block</code> <br>
-        <img src="./readme/false_block.png">
+        <img src="https://raw.githubusercontent.com/lumilovesyou/Lumis-Lots/refs/heads/master/readme/false_block.png">
         </details>
     </li>
 </ol>
@@ -46,7 +46,7 @@ Backports and reworks modern features while adding new features to 1.7.10.
         <summary>Composting Dirt</summary>
         Crafted from dirt and eight compostable items.<br>
         ID: <code>lumis_lots:composting_dirt</code> <br>
-        <img src="./readme/composting_dirt.png">
+        <img src="https://raw.githubusercontent.com/lumilovesyou/Lumis-Lots/refs/heads/master/readme/composting_dirt.png">
         </details>
     </li>
     <li>
@@ -54,15 +54,15 @@ Backports and reworks modern features while adding new features to 1.7.10.
         <summary>Composted Dirt</summary>
         A result of letting composting dirt sit.<br>
         ID: <code>lumis_lots:composted_dirt</code> <br>
-        <img src="./readme/composted_dirt.png">
+        <img src="https://raw.githubusercontent.com/lumilovesyou/Lumis-Lots/refs/heads/master/readme/composted_dirt.png">
         </details>
     </li>
 </ol>
 
 ## Gameplay guide
 ### Compost
-Composting dirt can be crafted by placing eight compostable items around a block of dirt. Once placed down it will begin to age into composted dirt, a process which can be sped up by placing a water source nearby. Once aged into composted dirt it can be broken to drop 3-5 bonemeal and a block of dirt. If you're using fortune bonemeal drops follow the formula <code>Drop rate = Y * ⌊1.5 * Fortune level⌋, Y ∈ {3, 4, 5}</code>.
-<img src="./readme/composting_dirt_recipe.png" style="border-radius: 10px;">
+Composting dirt can be crafted by placing eight compostable items around a block of dirt. Once placed down it will begin to age into composted dirt, a process which can be sped up by placing a water source nearby. Once aged into composted dirt it can be broken to drop 3-5 bonemeal and a block of dirt. If you're using fortune bonemeal drops follow the formula <code>Drop rate = Y * ⌊1.5 * Fortune level⌋, Y ∈ {3, 4, 5}</code>.<br>
+<img src="https://raw.githubusercontent.com/lumilovesyou/Lumis-Lots/refs/heads/master/readme/composting_dirt_recipe.png" style="border-radius: 10px;">
 <details>
 <summary>Compostable items</summary>
 <ul>
