@@ -1,6 +1,8 @@
 package com.lumi.lots;
 
 import com.lumi.lots.blocks.BlockBuilder;
+import com.lumi.lots.blocks.BlockDropsHandler.*;
+import com.lumi.lots.blocks.BlockTickHandler;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
@@ -10,9 +12,14 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 @Mod(modid = LumisCore.MOD_ID, version = LumisCore.MOD_VERSION)
 public class LumisCore
@@ -31,6 +38,9 @@ public class LumisCore
     public static LumisCore INSTANCE;
 
     public static Block testBlock;
+    public static Block trueBlock;
+    public static Block falseBlock;
+
     public static Block compostingDirt;
     public static Block compostedDirt;
 
@@ -39,30 +49,85 @@ public class LumisCore
         //Blocks
         testBlock = new BlockBuilder()
                 .setName("Test Block")
-                .setSound(1)
                 .setMaterial(7)
-                .setTab(1)
+                .setSound(1)
+                .build();
+        trueBlock = new BlockBuilder()
+                .setName("True Block")
+                .setMaterial(7)
+                .setSound(1)
+                .build();
+        falseBlock = new BlockBuilder()
+                .setName("False Block")
+                .setMaterial(7)
+                .setSound(1)
                 .build();
 
         compostingDirt = new BlockBuilder()
                 .setName("Composting Dirt")
                 .setMaterial(15)
-                .setSound(3)
+                .setSound(4)
                 .setTab(4)
                 .setResistance(0.5f)
                 .setHardness(0.5f)
+                .setHarvestTool("shovel")
+                .setTicking(true)
+                .setTickHandler(new BlockTickHandler() {
+                    @Override
+                    public void onTick(World world, int x, int y, int z, Random rand) {
+                        if (world.isAirBlock(x, y + 1, z)) {
+                            boolean nearbyWater = false;
+                            int chance = 0;
+                            for (int i = x - 1; i <= x + 1; i++) {
+                                for (int j = z - 1; j <= z + 1; j++) {
+                                    if (world.getBlock(i, y, j).isAssociatedBlock(Blocks.water)) {
+                                        nearbyWater = true;
+                                        break;
+                                    }
+                                }
+                                if (nearbyWater) {
+                                    break;
+                                }
+                            }
+                            if (world.isRaining() || nearbyWater) {
+                                chance = rand.nextInt(10);
+                            } else {
+                                chance = rand.nextInt(25);
+                            }
+                            if (chance == 0) {
+                                world.setBlock(x, y, z, compostedDirt);
+                            }
+                        }
+                    }
+                })
                 .build();
 
         compostedDirt = new BlockBuilder()
                 .setName("Composted Dirt")
                 .setMaterial(15)
-                .setSound(4)
+                .setSound(3)
                 .setTab(4)
                 .setResistance(0.5f)
                 .setHardness(0.5f)
+                .setHarvestTool("shovel")
+                .setDropMultipleItemsHandler(new DropMultiItemsHandler() {
+                    @Override
+                    public ArrayList<ItemStack> onGetMultiDropItems(World world, int x, int y, int z, int metadata, int fortune) {
+                        ArrayList<ItemStack> drops = new ArrayList<>();
+                        for (int i = 0; i < ((3 + world.rand.nextInt(3)) + Math.floor(fortune*1.5)); i++) {
+                            drops.add(new ItemStack(Items.dye, 1, 15));
+                        }
+                        return drops;
+
+                        /* value = random.randint(3,5) + math.floor(fortune*1.5) */
+                    }
+                })
                 .build();
 
         GameRegistry.registerBlock(testBlock, "test_block");
+        GameRegistry.registerBlock(trueBlock, "true_block");
+        GameRegistry.registerBlock(falseBlock, "false_block");
+
         GameRegistry.registerBlock(compostingDirt, "composting_dirt");
         GameRegistry.registerBlock(compostedDirt, "composted_dirt");
 
