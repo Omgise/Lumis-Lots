@@ -67,27 +67,6 @@ public class LumisCore
                 .setMaterial(7)
                 .setSound(1)
                 .setTab(0)
-                .setHarvestTool("shears")
-                .useToolEffectiveHandler(true)
-                .setCheckEffectiveToolHandler(new ToolEffectiveHandler() {
-                    @Override
-                    public boolean onCheckToolEffective(String type, int metadata) {
-                        return "hoe".equals(type) || "shears".equals(type) || "pickaxe".equals(type);
-                    }
-                })
-                .setPlayerRelativeBlockHardnessHandler(new PlayerRelativeBlockHardnessHandler() {
-                    @Override
-                    public float onGetPlayerRelativeBlockHardness(EntityPlayer player, float speed) {
-                        System.out.println("" + speed);
-                        Item item = player.getCurrentEquippedItem().getItem();
-                        if (item == Items.shears) {
-                            return 2.5F;
-                        } else if (item instanceof ItemHoe) {
-                            return 0.0F;
-                        }
-                        return -1.0F;
-                    }
-                })
                 .build();
         falseBlock = new BlockBuilder()
                 .setName("False Block")
