@@ -3,6 +3,7 @@ package com.lumi.lots;
 import com.lumi.lots.blocks.BlockBuilder;
 import com.lumi.lots.blocks.BlockDropsHandler.DropMultiItemsHandler;
 import com.lumi.lots.blocks.BlockTickHandler;
+import com.lumi.lots.blocks.BlockToolHandler.*;
 import com.lumi.lots.gui.MovementHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -11,9 +12,11 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
@@ -64,6 +67,27 @@ public class LumisCore
                 .setMaterial(7)
                 .setSound(1)
                 .setTab(0)
+                .setHarvestTool("shears")
+                .useToolEffectiveHandler(true)
+                .setCheckEffectiveToolHandler(new ToolEffectiveHandler() {
+                    @Override
+                    public boolean onCheckToolEffective(String type, int metadata) {
+                        return "hoe".equals(type) || "shears".equals(type) || "pickaxe".equals(type);
+                    }
+                })
+                .setPlayerRelativeBlockHardnessHandler(new PlayerRelativeBlockHardnessHandler() {
+                    @Override
+                    public float onGetPlayerRelativeBlockHardness(EntityPlayer player, float speed) {
+                        System.out.println("" + speed);
+                        Item item = player.getCurrentEquippedItem().getItem();
+                        if (item == Items.shears) {
+                            return 2.5F;
+                        } else if (item instanceof ItemHoe) {
+                            return 0.0F;
+                        }
+                        return -1.0F;
+                    }
+                })
                 .build();
         falseBlock = new BlockBuilder()
                 .setName("False Block")

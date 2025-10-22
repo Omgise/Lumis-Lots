@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class BlockDropsHandler {
-    public interface  DropAmountFortuneHandler{
+    public interface DropAmountFortuneHandler{
         int onDropFortune(int fortune, Random rand);
     }
 

@@ -1,6 +1,9 @@
 package com.lumi.lots.blocks;
 
 import com.lumi.lots.blocks.BlockDropsHandler.*;
+import com.lumi.lots.blocks.BlockToolHandler.*;
+
+import javax.tools.Tool;
 
 public class BlockBuilder {
     private int material = 0;
@@ -17,6 +20,9 @@ public class BlockBuilder {
     private DropAmountHandler dropAmountHandler = null;
     private DropTypeHandler dropTypeHandler = null;
     private DropMultiItemsHandler dropMultipleItemsHandler = null;
+    private ToolEffectiveHandler checkEffectiveToolHandler = null;
+    private PlayerRelativeBlockHardnessHandler playerRelativeBlockHardnessHandler = null;
+    private boolean useToolEffectiveHandler = false;
 
     public BlockBuilder setMaterial(int material) {
         this.material = material;
@@ -88,7 +94,22 @@ public class BlockBuilder {
         return this;
     }
 
+    public BlockBuilder setPlayerRelativeBlockHardnessHandler(PlayerRelativeBlockHardnessHandler playerRelativeBlockHardnessHandler) {
+        this.playerRelativeBlockHardnessHandler = playerRelativeBlockHardnessHandler;
+        return this;
+    }
+
+    public BlockBuilder setCheckEffectiveToolHandler(ToolEffectiveHandler checkEffectiveToolHandler) {
+        this.checkEffectiveToolHandler = checkEffectiveToolHandler;
+        return this;
+    }
+
+    public BlockBuilder useToolEffectiveHandler(boolean useToolEffectiveHandler) {
+        this.useToolEffectiveHandler = useToolEffectiveHandler;
+        return this;
+    }
+
     public LumisBlocks build() {
-        return new LumisBlocks(material, name, hardness, resistance, harvestTool, harvestLevel, sound, tab, ticks, tickHandler, dropAmountFortuneHandler, dropAmountHandler, dropTypeHandler, dropMultipleItemsHandler);
+        return new LumisBlocks(material, name, hardness, resistance, harvestTool, harvestLevel, sound, tab, ticks, tickHandler, dropAmountFortuneHandler, dropAmountHandler, dropTypeHandler, dropMultipleItemsHandler, checkEffectiveToolHandler, playerRelativeBlockHardnessHandler, useToolEffectiveHandler);
     }
 }
