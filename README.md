@@ -59,6 +59,16 @@ Backports and reworks modern features while adding new features to 1.7.10.
     </li>
 </ol>
 
+### New Features
+<ol>
+    <li>
+        <details>
+        <summary>Inventory Movement</summary>
+        Allows the user to move within most GUIs
+        </details>
+    </li>
+</ol>
+
 ## Gameplay guide
 ### Compost
 Composting dirt can be crafted by placing eight compostable items around a block of dirt. Once placed down it will begin to age into composted dirt, a process which can be sped up by placing a water source nearby. Once aged into composted dirt it can be broken to drop 3-5 bonemeal and a block of dirt. If you're using fortune bonemeal drops follow the formula <code>Drop rate = Y * ⌊1.5 * Fortune level⌋, Y ∈ {3, 4, 5}</code>.<br>
