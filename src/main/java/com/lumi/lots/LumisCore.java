@@ -140,13 +140,30 @@ public class LumisCore
         GameRegistry.registerBlock(compostedDirt, "composted_dirt");
 
         //Tags
-        Block[] compostableBlocks = {Blocks.pumpkin, Blocks.melon_block, Blocks.cactus, Blocks.hay_block, Blocks.vine, Blocks.waterlily, Blocks.sapling, Blocks.leaves, Blocks.leaves2, Blocks.double_plant, Blocks.tallgrass, Blocks.red_mushroom, Blocks.brown_mushroom, Blocks.nether_wart, Blocks.red_flower, Blocks.yellow_flower};
+        Block[] compostableBlocks = {Blocks.pumpkin, Blocks.melon_block, Blocks.cactus, Blocks.hay_block, Blocks.vine, Blocks.waterlily, Blocks.red_mushroom, Blocks.brown_mushroom, Blocks.nether_wart, Blocks.yellow_flower};
         for (Block block : compostableBlocks) {
-            OreDictionary.registerOre("compostable", new ItemStack(block, 1, OreDictionary.WILDCARD_VALUE));
+            OreDictionary.registerOre("compostable", new ItemStack(block));
         }
-        Item[] compostableItems = {Items.rotten_flesh, Items.apple, Items.bread, Items.fish, Items.chicken, Items.porkchop, Items.beef, Items.egg, Items.wheat, Items.wheat_seeds, Items.melon_seeds, Items.pumpkin_seeds, Items.melon, Items.potato, Items.baked_potato, Items.reeds};
+        for (int i = 0; i < 4; i++) { //Tree variants
+            OreDictionary.registerOre("compostable", new ItemStack(Blocks.sapling, 1, i));
+            OreDictionary.registerOre("compostable", new ItemStack(Blocks.leaves, 1, i));
+            OreDictionary.registerOre("compostable", new ItemStack(Blocks.leaves2, 1, i));
+        }
+        for (int i = 0; i < 9; i++) { //Flower variants
+            OreDictionary.registerOre("compostable", new ItemStack(Blocks.red_flower, 1, i));
+        }
+        for (int i = 0; i < 3; i++) { //Grass variants
+            OreDictionary.registerOre("compostable", new ItemStack(Blocks.tallgrass, 1, i));
+        }
+        for (int i = 0; i < 6; i++) { //Double plant varials
+            OreDictionary.registerOre("compostable", new ItemStack(Blocks.double_plant, 1, i));
+        }
+        Item[] compostableItems = {Items.rotten_flesh, Items.apple, Items.bread, Items.chicken, Items.porkchop, Items.beef, Items.egg, Items.wheat, Items.wheat_seeds, Items.melon_seeds, Items.pumpkin_seeds, Items.melon, Items.potato, Items.baked_potato, Items.reeds};
         for (Item item : compostableItems) {
             OreDictionary.registerOre("compostable", new ItemStack(item, 1, OreDictionary.WILDCARD_VALUE));
+        }
+        for (int i = 0; i < 4; i++) { //Fish variants
+            OreDictionary.registerOre("compostable", new ItemStack(Items.fish, 1, i));
         }
 
         //Recipes
