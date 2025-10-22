@@ -3,6 +3,8 @@ package com.lumi.lots;
 import com.lumi.lots.blocks.BlockBuilder;
 import com.lumi.lots.blocks.BlockDropsHandler.DropMultiItemsHandler;
 import com.lumi.lots.blocks.BlockTickHandler;
+import com.lumi.lots.gui.MovementHandler;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -16,6 +18,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -25,11 +29,15 @@ public class LumisCore
 {
     public static final String MOD_ID = "lumis_lots";
     public static final String MOD_VERSION = "@VERSION@";
+    private static final Logger logger = LogManager.getLogger(MOD_ID);
 
     @EventHandler
-    public void init(FMLInitializationEvent event)
-    {
+    public void init(FMLInitializationEvent event) {
         System.out.println("Lumi says \"Hello Forge world!\"");
+        logger.info("Lumi says \"Hello Forge world!\"");
+        if (event.getSide().isClient()) {
+            FMLCommonHandler.instance().bus().register(new MovementHandler());
+        }
     }
 
     @Mod.Instance(MOD_ID)
