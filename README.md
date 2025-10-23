@@ -57,6 +57,12 @@ Backports and reworks modern features while adding new features to 1.7.10.
         <img src="https://raw.githubusercontent.com/lumilovesyou/Lumis-Lots/refs/heads/master/readme/composted_dirt.png">
         </details>
     </li>
+    <li>
+    <details>
+    <summary>Hoes Breaking Leaves</summary>
+    Hoes now break leaves at various speeds depending on material
+    </details>
+    </li>
 </ol>
 
 ### New Features
