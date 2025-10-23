@@ -116,7 +116,6 @@ public class LumisBlocks extends Block {
 
     @Override
     public boolean isToolEffective(String type, int metadata) {
-        System.out.println(type);
         if (checkEffectiveToolHandler != null) {
             return checkEffectiveToolHandler.onCheckToolEffective(type, metadata);
         } else {
@@ -126,10 +125,16 @@ public class LumisBlocks extends Block {
 
     @Override
     public float getPlayerRelativeBlockHardness(EntityPlayer player, World world, int x, int y, int z) {
+        float originalValue = super.getPlayerRelativeBlockHardness(player, world, x, y, z);
          if (playerRelativeBlockHardnessHandler != null) {
-             return playerRelativeBlockHardnessHandler.onGetPlayerRelativeBlockHardness(player, super.getPlayerRelativeBlockHardness(player, world, x, y, z));
+             float newValue = playerRelativeBlockHardnessHandler.onGetPlayerRelativeBlockHardness(player, originalValue);
+             if (newValue < 0.0F) {
+                return originalValue;
+             } else {
+                return newValue;
+             }
          } else {
-             return super.getPlayerRelativeBlockHardness(player, world, x, y, z);
+             return originalValue;
          }
     }
 }
