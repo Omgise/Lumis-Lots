@@ -72,38 +72,6 @@ public class LumisCore
                 .setTab(0)
                 .setHarvestTool("shears")
                 .useToolEffectiveHandler(true)
-                .setCheckEffectiveToolHandler(new ToolEffectiveHandler() {
-                    @Override
-                    public boolean onCheckToolEffective(String type, int metadata) {
-                        return "hoe".equals(type) || "shears".equals(type) || "pickaxe".equals(type);
-                    }
-                })
-                .setPlayerRelativeBlockHardnessHandler(new PlayerRelativeBlockHardnessHandler() {
-                    @Override
-                    public float onGetPlayerRelativeBlockHardness(EntityPlayer player, float speed) {
-                        System.out.println("" + speed);
-                        if (player.getHeldItem() != null) {
-                            Item tool = player.getCurrentEquippedItem().getItem();
-                            if (tool == Items.shears) {
-                                return 1.0F;
-                            } else if (tool instanceof ItemHoe) {
-                                String material = ((ItemHoe) tool).getToolMaterialName();
-                                if (material.equals("WOOD")) {
-                                    return 0.40F;
-                                } else if (material.equals("STONE")) {
-                                    return 0.70F;
-                                } else if (material.equals("IRON")) {
-                                    return 1.0F;
-                                } else if (material.equals("EMERALD")) {
-                                    return 1.0F;
-                                } else if (material.equals("GOLD")) {
-                                    return 1.0F;
-                                }
-                            }
-                        }
-                        return -1.0F;
-                    }
-                })
                 .build();
         falseBlock = new BlockBuilder()
                 .setName("False Block")

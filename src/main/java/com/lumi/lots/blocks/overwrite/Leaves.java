@@ -16,16 +16,13 @@ public class Leaves {
         if (block == Blocks.leaves || block == Blocks.leaves2) {
             if (event.entityPlayer.getCurrentEquippedItem() != null) {
                 Item tool = event.entityPlayer.getCurrentEquippedItem().getItem();
-                if (tool == Items.shears) {
-                    event.newSpeed = event.originalSpeed * 1.0F;
-                    System.out.println("Shears!");
-                } else if (tool instanceof ItemHoe) {
+                if (tool instanceof ItemHoe) {
                     System.out.println("Hoe!");
                     String material = ((ItemHoe) tool).getToolMaterialName();
                     if (material.equals("WOOD")) {
                         event.newSpeed = event.newSpeed * 3.0F;
                     } else if (material.equals("STONE")) {
-                        event.newSpeed = event.newSpeed * 5.5F;
+                        event.newSpeed = event.newSpeed * 5.0F;
                     } else if (material.equals("GOLD") || material.equals("EMERALD") || material.equals("IRON")) {
                         event.newSpeed = event.originalSpeed * 6.0F;
                     }
