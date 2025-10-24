@@ -1,5 +1,7 @@
 package com.lumi.lots;
 
+import com.lumi.lots.audio.music.GetPlayingTrackName;
+import com.lumi.lots.audio.music.overwrite.Music;
 import com.lumi.lots.blocks.BlockBuilder;
 import com.lumi.lots.blocks.BlockDropsHandler.DropMultiItemsHandler;
 import com.lumi.lots.blocks.BlockTickHandler;
@@ -12,7 +14,9 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.ReflectionHelper;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -25,7 +29,10 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import sun.misc.Unsafe;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -41,8 +48,36 @@ public class LumisCore
         System.out.println("Lumi says \"Hello Forge world!\"");
         logger.info("Lumi says \"Hello Forge world!\"");
         if (event.getSide().isClient()) {
+            //Inventory movement
             FMLCommonHandler.instance().bus().register(new MovementHandler());
+
+            //Track display
+            MinecraftForge.EVENT_BUS.register(new GetPlayingTrackName());
+
+
+            //No cooldown music
+            Minecraft mc = Minecraft.getMinecraft();
+            Field tickerField;
+            try {
+                tickerField = Minecraft.class.getDeclaredField("mcMusicTicker");
+            } catch (NoSuchFieldException e) {
+                try {
+                    tickerField = Minecraft.class.getDeclaredField("field_147126_aw");
+                } catch (NoSuchFieldException e2) {
+                    throw new RuntimeException(e2);
+                }
+            }
+            try {
+                tickerField.setAccessible(true);
+                Field modifiersField = Field.class.getDeclaredField("modifiers");
+                modifiersField.setAccessible(true);
+                modifiersField.setInt(tickerField, tickerField.getModifiers() & ~Modifier.FINAL);
+                tickerField.set(Minecraft.getMinecraft(), new Music(Minecraft.getMinecraft()));
+            } catch (NoSuchFieldException | IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
         }
+        //Leaves broken by hoes
         MinecraftForge.EVENT_BUS.register(new Leaves());
     }
 

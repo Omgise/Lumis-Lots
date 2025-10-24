@@ -33,7 +33,7 @@ Backports and reworks modern features while adding new features to 1.7.10.
         <details>
         <summary>False Block</summary>
         Used only for testing in development.<br>
-        ID: <code>lumis_lots:false_block</code> <br>
+        ID: <code>lumis_lots:false_block</code><br>
         <img src="https://raw.githubusercontent.com/lumilovesyou/Lumis-Lots/refs/heads/master/readme/false_block.png">
         </details>
     </li>
@@ -60,7 +60,7 @@ Backports and reworks modern features while adding new features to 1.7.10.
     <li>
     <details>
     <summary>Hoes Breaking Leaves</summary>
-    Hoes now break leaves at various speeds depending on material
+    Hoes now break leaves at various speeds depending on material level
     </details>
     </li>
 </ol>

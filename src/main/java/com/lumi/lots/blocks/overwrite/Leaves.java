@@ -17,7 +17,6 @@ public class Leaves {
             if (event.entityPlayer.getCurrentEquippedItem() != null) {
                 Item tool = event.entityPlayer.getCurrentEquippedItem().getItem();
                 if (tool instanceof ItemHoe) {
-                    System.out.println("Hoe!");
                     String material = ((ItemHoe) tool).getToolMaterialName();
                     if (material.equals("WOOD")) {
                         event.newSpeed = event.newSpeed * 3.0F;
