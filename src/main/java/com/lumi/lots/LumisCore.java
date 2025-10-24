@@ -14,6 +14,7 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.ReflectionHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.init.Blocks;
@@ -53,22 +54,13 @@ public class LumisCore
 
             //No cooldown music
             Minecraft mc = Minecraft.getMinecraft();
-            Field tickerField;
             try {
-                tickerField = Minecraft.class.getDeclaredField("mcMusicTicker");
-            } catch (NoSuchFieldException e) {
-                try {
-                    tickerField = Minecraft.class.getDeclaredField("field_147126_aw");
-                } catch (NoSuchFieldException e2) {
-                    throw new RuntimeException(e2);
-                }
-            }
-            try {
+                Field tickerField = ReflectionHelper.findField(Minecraft.class, "mcMusicTicker", "field_147126_aw");
                 tickerField.setAccessible(true);
                 Field modifiersField = Field.class.getDeclaredField("modifiers");
                 modifiersField.setAccessible(true);
                 modifiersField.setInt(tickerField, tickerField.getModifiers() & ~Modifier.FINAL);
-                tickerField.set(Minecraft.getMinecraft(), new Music(Minecraft.getMinecraft()));
+                tickerField.set(mc, new Music(mc));
             } catch (NoSuchFieldException | IllegalAccessException e) {
                 throw new RuntimeException(e);
             }

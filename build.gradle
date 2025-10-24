@@ -20,7 +20,7 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.3.2"
+version = "1.3.4"
 group = "com.lumi.lots"
 archivesBaseName = "Lumis-Lots"
 

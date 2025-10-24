@@ -3,6 +3,7 @@ package com.lumi.lots.audio.music;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;
+import net.minecraft.client.audio.SoundCategory;
 import net.minecraft.client.audio.SoundEventAccessorComposite;
 import net.minecraft.client.audio.SoundPoolEntry;
 import net.minecraft.util.ResourceLocation;
@@ -12,7 +13,7 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 
 public class GetPlayingTrackName {
-    private static final Dictionary<String, String> trackNames = new Hashtable<String, String>() {{
+    private static final Dictionary<String, String> trackNames = new Hashtable<String, String>() {{ //None of these names are correct I think, but I'll fix it later. (Thanks Minecraft wiki </3)
         put("Nuance1", "Key");
         put("Nuance2", "Oxygène");
         put("Calm1", "Minecraft");
@@ -47,7 +48,8 @@ public class GetPlayingTrackName {
 
     @SubscribeEvent
     public void onSoundPlay(PlaySoundEvent17 event) {
-        if (Minecraft.getMinecraft().theWorld != null && Minecraft.getMinecraft().thePlayer != null) {
+        final Minecraft mc = Minecraft.getMinecraft();
+        if (mc.theWorld != null && mc.thePlayer != null && mc.gameSettings.getSoundLevel(SoundCategory.MUSIC) != 0.0F) {
             ISound sound = event.sound;
 
             if (sound.getAttenuationType() == ISound.AttenuationType.NONE && sound.getPositionedSoundLocation().getResourceDomain().equals("minecraft") && sound.getPositionedSoundLocation().getResourcePath().startsWith("music.")) {
@@ -71,7 +73,7 @@ public class GetPlayingTrackName {
                             builder.append(part.substring(0, 1).toUpperCase()).append(part.substring(1));
                         }
 
-                        Minecraft.getMinecraft().ingameGUI.setRecordPlayingMessage(trackNames.get(builder.toString()));
+                        mc.ingameGUI.setRecordPlayingMessage(trackNames.get(builder.toString()));
                     }
                 }
             }
