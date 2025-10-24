@@ -73,6 +73,12 @@ Backports and reworks modern features while adding new features to 1.7.10.
         Allows the user to move within most GUIs
         </details>
     </li>
+    <li>
+        <details>
+        <summary>No Music Cooldown</summary>
+        Removes the cooldown between music tracks
+        </details>
+    </li>
 </ol>
 
 ## Gameplay guide
