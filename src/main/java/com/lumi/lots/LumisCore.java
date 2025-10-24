@@ -1,6 +1,6 @@
 package com.lumi.lots;
 
-import com.lumi.lots.audio.music.GetPlayingTrackName;
+import com.lumi.lots.audio.music.DisplayPlayingTrackName;
 import com.lumi.lots.audio.music.overwrite.Music;
 import com.lumi.lots.blocks.BlockBuilder;
 import com.lumi.lots.blocks.BlockDropsHandler.DropMultiItemsHandler;
@@ -48,8 +48,8 @@ public class LumisCore
             //Inventory movement
             FMLCommonHandler.instance().bus().register(new MovementHandler());
 
-            //Track display
-            MinecraftForge.EVENT_BUS.register(new GetPlayingTrackName());
+            //Music display
+            //MinecraftForge.EVENT_BUS.register(new DisplayPlayingTrackName());
 
 
             //No cooldown music
