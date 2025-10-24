@@ -18,12 +18,17 @@ public class Leaves {
                 Item tool = event.entityPlayer.getCurrentEquippedItem().getItem();
                 if (tool instanceof ItemHoe) {
                     String material = ((ItemHoe) tool).getToolMaterialName();
-                    if (material.equals("WOOD")) {
-                        event.newSpeed = event.newSpeed * 3.0F;
-                    } else if (material.equals("STONE")) {
-                        event.newSpeed = event.newSpeed * 5.0F;
-                    } else if (material.equals("GOLD") || material.equals("EMERALD") || material.equals("IRON")) {
-                        event.newSpeed = event.originalSpeed * 6.0F;
+                    switch (material) {
+                        case "WOOD":
+                            event.newSpeed = event.newSpeed * 3;
+                            break;
+                        case "STONE":
+                            event.newSpeed = event.newSpeed * 5;
+                            break;
+                        case "GOLD":
+                        case "EMERALD":
+                        case "IRON":
+                            event.newSpeed = event.originalSpeed * 6;
                     }
                 }
             }

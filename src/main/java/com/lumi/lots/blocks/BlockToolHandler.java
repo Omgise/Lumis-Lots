@@ -1,7 +1,6 @@
 package com.lumi.lots.blocks;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.World;
 
 public class BlockToolHandler {
     public interface ToolEffectiveHandler {

@@ -3,8 +3,6 @@ package com.lumi.lots.blocks;
 import com.lumi.lots.blocks.BlockDropsHandler.*;
 import com.lumi.lots.blocks.BlockToolHandler.*;
 
-import javax.tools.Tool;
-
 public class BlockBuilder {
     private int material = 0;
     private String name = "Default Value";

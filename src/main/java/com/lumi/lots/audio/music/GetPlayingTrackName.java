@@ -8,7 +8,43 @@ import net.minecraft.client.audio.SoundPoolEntry;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.sound.PlaySoundEvent17;
 
+import java.util.Dictionary;
+import java.util.Hashtable;
+
 public class GetPlayingTrackName {
+    private static final Dictionary<String, String> trackNames = new Hashtable<String, String>() {{
+        put("Nuance1", "Key");
+        put("Nuance2", "Oxygène");
+        put("Calm1", "Minecraft");
+        put("Calm2", "Clark");
+        put("Calm3", "Sweden");
+        put("Piano1", "Dry Hands");
+        put("Piano2", "Wet Hands");
+        put("Piano3", "Mice on Venus");
+        put("Hal1", "Subwoofer Lullaby");
+        put("Hal2", "Living Mice");
+        put("Hal3", "Haggstrom");
+        put("Hal4", "Danny");
+        put("End", "The End");
+        put("Boss", "Boss");
+        put("Credits", "Alpha");
+        put("Nether1", "Concrete Halls");
+        put("Nether2", "Dead Voxel");
+        put("Nether3", "Warmth");
+        put("Nether4", "Ballad of the Cats");
+        put("Creative1", "Biome Fest");
+        put("Creative2", "Blind Spots");
+        put("Creative3", "Haunt Muskie");
+        put("Creative4", "Aria Math");
+        put("Creative5", "Dreiton");
+        put("Creative6", "Taswell");
+        put("Menu1", "Mutation");
+        put("Menu2", "Moog City 2");
+        put("Menu3", "Beginning 2");
+        put("Menu4", "Floating Trees");
+    }};
+
+
     @SubscribeEvent
     public void onSoundPlay(PlaySoundEvent17 event) {
         ISound sound = event.sound;
@@ -33,7 +69,7 @@ public class GetPlayingTrackName {
                         builder.append(part.substring(0, 1).toUpperCase()).append(part.substring(1));
                     }
 
-                    Minecraft.getMinecraft().ingameGUI.setRecordPlayingMessage(builder.toString());
+                    Minecraft.getMinecraft().ingameGUI.setRecordPlayingMessage(trackNames.get(builder.toString()));
                 }
             }
         }
