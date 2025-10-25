@@ -5,7 +5,7 @@ import com.lumi.lots.blocks.BlockToolHandler.*;
 
 public class BlockBuilder {
     private int material = 0;
-    private String name = "Default Value";
+    private String name = "default_value";
     private float hardness = 1.0F;
     private float resistance = 1.0F;
     private String harvestTool = "pickaxe";

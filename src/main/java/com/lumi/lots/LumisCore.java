@@ -8,6 +8,9 @@ import com.lumi.lots.blocks.BlockTickHandler;
 import com.lumi.lots.blocks.BlockToolHandler.*;
 import com.lumi.lots.blocks.overwrite.Leaves;
 import com.lumi.lots.gui.MovementHandler;
+import com.lumi.lots.items.ItemBuilder;
+import com.lumi.lots.items.ItemMetaDataHandler.*;
+import com.lumi.lots.items.LumisItems;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -17,10 +20,12 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
@@ -78,6 +83,8 @@ public class LumisCore
 
     public static Block compostingDirt;
     public static Block compostedDirt;
+
+    public static Item ring;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -169,6 +176,32 @@ public class LumisCore
 
         GameRegistry.registerBlock(compostingDirt, "composting_dirt");
         GameRegistry.registerBlock(compostedDirt, "composted_dirt");
+
+        //Items
+        final IIcon[] icons = new IIcon[4];
+
+        ring = new ItemBuilder()
+                .setName("ring")
+                .setHasSubtypes(true)
+                .setIconFromMetadataHandler(new IconFromMetadataHandler() {
+                    @Override
+                    public IIcon onGetIconFromMetadata(int metadata) {
+                        if (metadata < 0 || metadata >= icons.length) metadata = 0;
+                        return icons[metadata];
+                    }
+                })
+                .setRegisterIconsHandler(new RegisterIconsHandler() {
+                    @Override
+                    public void onRegisterIcons(IIconRegister register) {
+                        icons[0] = register.registerIcon("lumis_lots:ring_gold_diamond");
+                        icons[1] = register.registerIcon("lumis_lots:ring_gold_emerald");
+                        icons[2] = register.registerIcon("lumis_lots:ring_iron_diamond");
+                        icons[3] = register.registerIcon("lumis_lots:ring_iron_emerald");
+                    }
+                })
+                .build();
+
+        GameRegistry.registerItem(ring, "ring");
 
         //Tags
         Block[] compostableBlocks = {Blocks.pumpkin, Blocks.melon_block, Blocks.cactus, Blocks.hay_block, Blocks.vine, Blocks.waterlily, Blocks.red_mushroom, Blocks.brown_mushroom, Blocks.yellow_flower};
