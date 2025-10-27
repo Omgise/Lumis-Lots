@@ -8,6 +8,7 @@ import com.lumi.lots.blocks.BlockTickHandler;
 import com.lumi.lots.blocks.BlockToolHandler.*;
 import com.lumi.lots.blocks.overwrite.Leaves;
 import com.lumi.lots.gui.MovementHandler;
+import com.lumi.lots.gui.TextFieldFocus;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -46,6 +47,7 @@ public class LumisCore
         logger.info("Lumi says \"Hello Forge world!\"");
         if (event.getSide().isClient()) {
             //Inventory movement
+            FMLCommonHandler.instance().bus().register(new TextFieldFocus());
             FMLCommonHandler.instance().bus().register(new MovementHandler());
 
             //Music display
