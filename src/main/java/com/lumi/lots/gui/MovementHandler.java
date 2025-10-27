@@ -20,7 +20,7 @@ public class MovementHandler {
         Minecraft mc = Minecraft.getMinecraft();
 
         if (mc.currentScreen != null && !mc.isGamePaused()) {
-            if (mc.currentScreen instanceof GuiChat || mc.currentScreen instanceof GuiIngameModOptions && !TextFieldFocus.isTextFocused) {
+            if (!(mc.currentScreen instanceof GuiChat || mc.currentScreen instanceof GuiIngameModOptions) && !TextFieldFocus.isTextFocused) {
                 checkAndRunKey(mc.gameSettings.keyBindForward);
                 checkAndRunKey(mc.gameSettings.keyBindBack);
                 checkAndRunKey(mc.gameSettings.keyBindLeft);
