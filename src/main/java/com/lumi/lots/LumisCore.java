@@ -1,6 +1,5 @@
 package com.lumi.lots;
 
-import com.lumi.lots.audio.music.DisplayPlayingTrackName;
 import com.lumi.lots.audio.music.overwrite.Music;
 import com.lumi.lots.blocks.BlockBuilder;
 import com.lumi.lots.blocks.BlockDropsHandler.DropMultiItemsHandler;
@@ -8,9 +7,9 @@ import com.lumi.lots.blocks.BlockTickHandler;
 import com.lumi.lots.blocks.BlockToolHandler.*;
 import com.lumi.lots.blocks.overwrite.Leaves;
 import com.lumi.lots.gui.MovementHandler;
+import com.lumi.lots.gui.TextFieldFocus;
 import com.lumi.lots.items.ItemBuilder;
 import com.lumi.lots.items.ItemMetaDataHandler.*;
-import com.lumi.lots.items.LumisItems;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -51,6 +50,7 @@ public class LumisCore
         logger.info("Lumi says \"Hello Forge world!\"");
         if (event.getSide().isClient()) {
             //Inventory movement
+            FMLCommonHandler.instance().bus().register(new TextFieldFocus());
             FMLCommonHandler.instance().bus().register(new MovementHandler());
 
             //Music display
@@ -178,25 +178,36 @@ public class LumisCore
         GameRegistry.registerBlock(compostedDirt, "composted_dirt");
 
         //Items
-        final IIcon[] icons = new IIcon[4];
-
         ring = new ItemBuilder()
                 .setName("ring")
                 .setHasSubtypes(true)
-                .setIconFromMetadataHandler(new IconFromMetadataHandler() {
-                    @Override
-                    public IIcon onGetIconFromMetadata(int metadata) {
-                        if (metadata < 0 || metadata >= icons.length) metadata = 0;
-                        return icons[metadata];
-                    }
-                })
-                .setRegisterIconsHandler(new RegisterIconsHandler() {
+                .setCombinedMetadataHandler(new CombinedMetadataHandler() {
+                    final IIcon[] icons = new IIcon[4];
+
                     @Override
                     public void onRegisterIcons(IIconRegister register) {
                         icons[0] = register.registerIcon("lumis_lots:ring_gold_diamond");
                         icons[1] = register.registerIcon("lumis_lots:ring_gold_emerald");
                         icons[2] = register.registerIcon("lumis_lots:ring_iron_diamond");
                         icons[3] = register.registerIcon("lumis_lots:ring_iron_emerald");
+                    }
+
+                    @Override
+                    public IIcon onGetIconFromMetadata(int metadata) {
+                        if (metadata < 0 || metadata >= icons.length) metadata = 0;
+                        return icons[metadata];
+                    }
+
+                    @Override
+                    public String onGetUnlocalisedName(ItemStack stack) {
+                        int meta = stack.getItemDamage();
+                        switch (meta) {
+                            case 0: return "item.lumis_lots:ring_gold_diamond";
+                            case 1: return "item.lumis_lots:ring_gold_emerald";
+                            case 2: return "item.lumis_lots:ring_iron_diamond";
+                            case 3: return "item.lumis_lots:ring_iron_emerald";
+                            default: return "item.lumis_lots:ring_unassigned";
+                        }
                     }
                 })
                 .build();

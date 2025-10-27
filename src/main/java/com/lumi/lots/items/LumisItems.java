@@ -4,6 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
 import com.lumi.lots.items.ItemMetaDataHandler.*;
@@ -52,6 +53,15 @@ public class LumisItems extends Item {
             return iconFromMetadataHandler.onGetIconFromMetadata(meta);
         } else {
             return super.getIconFromDamage(meta);
+        }
+    }
+
+    @Override
+    public String getUnlocalizedName(ItemStack stack) {
+        if (combinedMetadataHandler != null) {
+            return combinedMetadataHandler.onGetUnlocalisedName(stack);
+        } else {
+            return super.getUnlocalizedName(stack);
         }
     }
 }

@@ -6,7 +6,6 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
-import net.minecraft.client.gui.inventory.GuiEditSign;
 import net.minecraft.client.settings.KeyBinding;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,22 +16,11 @@ public class MovementHandler {
 
     @SubscribeEvent
     public void onClientTick(TickEvent.ClientTickEvent event) {
-        if (event.phase != TickEvent.Phase.END) {
-            return;
-        }
-
+        if (event.phase != TickEvent.Phase.END) return;
         Minecraft mc = Minecraft.getMinecraft();
 
         if (mc.currentScreen != null && !mc.isGamePaused()) {
-            boolean notInIllegalWindow = true;
-            Class<?>[] illegalGui = {GuiChat.class, GuiCommandBlock.class, GuiEditSign.class, GuiIngameModOptions.class};
-            for (Class<?> guiClass : illegalGui) {
-                if (guiClass.isInstance(mc.currentScreen)) {
-                    notInIllegalWindow = false;
-                    break;
-                }
-            }
-            if (notInIllegalWindow) {
+            if (mc.currentScreen instanceof GuiChat || mc.currentScreen instanceof GuiIngameModOptions && !TextFieldFocus.isTextFocused) {
                 checkAndRunKey(mc.gameSettings.keyBindForward);
                 checkAndRunKey(mc.gameSettings.keyBindBack);
                 checkAndRunKey(mc.gameSettings.keyBindLeft);
