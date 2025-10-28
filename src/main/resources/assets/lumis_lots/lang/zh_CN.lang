@@ -1,0 +1,5 @@
+tile.test_block.name=测试方块
+tile.false_block.name=假方块
+tile.true_block.name=真方块
+tile.composting_dirt.name=堆肥土
+tile.composted_dirt.name=堆肥土
