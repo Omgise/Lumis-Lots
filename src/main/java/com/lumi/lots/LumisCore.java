@@ -4,16 +4,17 @@ import com.lumi.lots.audio.music.overwrite.Music;
 import com.lumi.lots.blocks.BlockBuilder;
 import com.lumi.lots.blocks.BlockDropsHandler.DropMultiItemsHandler;
 import com.lumi.lots.blocks.BlockTickHandler;
-import com.lumi.lots.blocks.BlockToolHandler.*;
 import com.lumi.lots.blocks.overwrite.Leaves;
 import com.lumi.lots.gui.MovementHandler;
-import com.lumi.lots.gui.TextFieldFocus;
+import com.lumi.lots.gui.TextFieldFocusChecks.TextFieldFocus;
 import com.lumi.lots.items.ItemBuilder;
 import com.lumi.lots.items.ItemMetaDataHandler.*;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.ReflectionHelper;
@@ -72,6 +73,13 @@ public class LumisCore
         }
         //Leaves broken by hoes
         MinecraftForge.EVENT_BUS.register(new Leaves());
+    }
+
+    @EventHandler
+    public void postInit(FMLPostInitializationEvent event) {
+        if (Loader.isModLoaded("NotEnoughItems") && Loader.isModLoaded("CodeChickenCore")) {
+            System.out.println("NEI & CCC installed!"); //Can check if mods are installed!
+        }
     }
 
     @Mod.Instance(MOD_ID)

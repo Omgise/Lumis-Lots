@@ -123,3 +123,24 @@ Composting dirt can be crafted by placing eight compostable items around a block
 ## How to use
 
 Simply add this mod to your game's `mods` folder.
+
+## To-do
+- [ ] Rings
+  - [ ] Ring Slot
+  - [ ] Enchantments
+  - [ ] Recipes
+- [ ] Tickrate command
+  - [ ] Register command
+  - [ ] Speed up client + server tickrate
+- [ ] Find a fix to displaying the current music track's name
+- [ ] First person view
+  - [ ] Hide player's hand
+  - [ ] Show body
+- [ ] Lapis needed for enchanting
+  - [ ] Add slot
+  - [ ] Add requirement enchant
+- [ ] Tooltip to show enchant when enchanting
+- [x] Make inv movement not happen when typing
+  - [ ] Fix NEI 1.3.7 GTNH version
+- [ ] Add config file
+- [ ] Make cobblestone generators make Et Futurum Requiem’s deepslate below Y=22

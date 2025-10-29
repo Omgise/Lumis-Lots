@@ -1,6 +1,7 @@
 package com.lumi.lots.gui;
 
 import com.lumi.lots.LumisCore;
+import com.lumi.lots.gui.TextFieldFocusChecks.TextFieldFocus;
 import cpw.mods.fml.client.GuiIngameModOptions;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
@@ -11,6 +12,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Keyboard;
 
+import static com.lumi.lots.gui.TextFieldFocusChecks.TextFieldFocusNEI.isNEISearchFocused;
+
 public class MovementHandler {
     private static final Logger logger = LogManager.getLogger(LumisCore.MOD_ID);
 
@@ -19,7 +22,7 @@ public class MovementHandler {
         if (event.phase != TickEvent.Phase.END) return;
         Minecraft mc = Minecraft.getMinecraft();
 
-        if (mc.currentScreen != null && !mc.isGamePaused()) {
+        if (mc.currentScreen != null && !mc.isGamePaused() && !isNEISearchFocused()) {
             if (!(mc.currentScreen instanceof GuiChat || mc.currentScreen instanceof GuiIngameModOptions) && !TextFieldFocus.isTextFocused) {
                 checkAndRunKey(mc.gameSettings.keyBindForward);
                 checkAndRunKey(mc.gameSettings.keyBindBack);

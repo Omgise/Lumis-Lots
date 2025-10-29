@@ -1,4 +1,4 @@
-package com.lumi.lots.gui;
+package com.lumi.lots.gui.TextFieldFocusChecks;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
@@ -37,7 +37,7 @@ public class TextFieldFocus {
                             }
                         }
                     }
-                } catch (IllegalAccessException ignored) {}
+                } catch (Exception ignored) {}
             }
         }
         isTextFocused = isFocused;
