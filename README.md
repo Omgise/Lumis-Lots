@@ -141,6 +141,6 @@ Simply add this mod to your game's `mods` folder.
   - [ ] Add requirement enchant
 - [ ] Tooltip to show enchant when enchanting
 - [x] Make inv movement not happen when typing
-  - [ ] Fix NEI 1.3.7 GTNH version
-- [ ] Add config file
+  - [x] Fix NEI 1.3.7 GTNH version
+- [x] Add config file
 - [ ] Make cobblestone generators make Et Futurum Requiem’s deepslate below Y=22
