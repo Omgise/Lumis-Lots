@@ -79,6 +79,12 @@ Backports and reworks modern features while adding new features to 1.7.10.
         Removes the cooldown between music tracks
         </details>
     </li>
+    <li>
+        <details>
+        <summary>Deepslate Cobblestone Generators (<a href="https://modrinth.com/mod/etfuturum">EtFuturum</a> necessary)</summary>
+        Makes cobblestone/stone generators produce their deepslate equivalent at Y=22 and below.
+        </details>
+    </li>
 </ol>
 
 ## Gameplay guide
@@ -122,4 +128,4 @@ Composting dirt can be crafted by placing eight compostable items around a block
 
 ## How to use
 
-Simply add this mod to your game's `mods` folder.
+Add this mod to your game's `mods` folder along with [Unimxins](https://modrinth.com/mod/unimixins/versions) 0.1.23 or greater.

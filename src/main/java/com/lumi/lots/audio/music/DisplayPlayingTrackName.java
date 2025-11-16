@@ -13,7 +13,7 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 
 public class DisplayPlayingTrackName {
-    private static final Dictionary<String, String> trackNames = new Hashtable<String, String>() {{ //None of these names are correct I think, but I'll fix it later. (Thanks Minecraft wiki </3)
+    private static final Dictionary<String, String> trackNames = new Hashtable<String, String>() {{ //These are all in fact correct but Minecraft tells me the wrong file playing so they don't work :pensive:
         put("Calm1", "Minecraft");
         put("Calm2", "Clark");
         put("Calm3", "Sweden");
@@ -45,7 +45,6 @@ public class DisplayPlayingTrackName {
         put("Menu4", "Floating Trees");
     }};
 
-
     @SubscribeEvent
     public void onSoundPlay(PlaySoundEvent17 event) {
         final Minecraft mc = Minecraft.getMinecraft();
@@ -73,7 +72,8 @@ public class DisplayPlayingTrackName {
                             builder.append(part.substring(0, 1).toUpperCase()).append(part.substring(1));
                         }
 
-                        mc.ingameGUI.setRecordPlayingMessage(trackNames.get(builder.toString()));
+                        //mc.ingameGUI.setRecordPlayingMessage(trackNames.get(builder.toString()));
+                        mc.ingameGUI.setRecordPlayingMessage(builder.toString());
                     }
                 }
             }

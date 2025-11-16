@@ -5,14 +5,16 @@ import com.lumi.lots.audio.music.overwrite.Music;
 import com.lumi.lots.blocks.BlockBuilder;
 import com.lumi.lots.blocks.BlockDropsHandler.DropMultiItemsHandler;
 import com.lumi.lots.blocks.BlockTickHandler;
-import com.lumi.lots.blocks.BlockToolHandler.*;
 import com.lumi.lots.blocks.overwrite.Leaves;
+import com.lumi.lots.config.Config;
 import com.lumi.lots.gui.MovementHandler;
-import com.lumi.lots.gui.TextFieldFocus;
+import com.lumi.lots.gui.TextFieldFocusChecks.TextFieldFocus;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.ReflectionHelper;
@@ -40,31 +42,40 @@ public class LumisCore
     public static final String MOD_ID = "lumis_lots";
     public static final String MOD_VERSION = "@VERSION@";
     private static final Logger logger = LogManager.getLogger(MOD_ID);
+    public static Config config;
+
+    public boolean etFuturumInstalled;
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
         System.out.println("Lumi says \"Hello Forge world!\"");
         logger.info("Lumi says \"Hello Forge world!\"");
+
         if (event.getSide().isClient()) {
-            //Inventory movement
-            FMLCommonHandler.instance().bus().register(new TextFieldFocus());
-            FMLCommonHandler.instance().bus().register(new MovementHandler());
+            if (config.invMovement) {
+                //Inventory movement
+                FMLCommonHandler.instance().bus().register(new TextFieldFocus());
+                FMLCommonHandler.instance().bus().register(new MovementHandler());
+            }
 
             //Music display
-            //MinecraftForge.EVENT_BUS.register(new DisplayPlayingTrackName());
-
+            if (config.displayTrackName) {
+                MinecraftForge.EVENT_BUS.register(new DisplayPlayingTrackName());
+            }
 
             //No cooldown music
-            Minecraft mc = Minecraft.getMinecraft();
-            try {
-                Field tickerField = ReflectionHelper.findField(Minecraft.class, "mcMusicTicker", "field_147126_aw");
-                tickerField.setAccessible(true);
-                Field modifiersField = Field.class.getDeclaredField("modifiers");
-                modifiersField.setAccessible(true);
-                modifiersField.setInt(tickerField, tickerField.getModifiers() & ~Modifier.FINAL);
-                tickerField.set(mc, new Music(mc));
-            } catch (NoSuchFieldException | IllegalAccessException e) {
-                throw new RuntimeException(e);
+            if (!config.doMusicCooldown) {
+                Minecraft mc = Minecraft.getMinecraft();
+                try {
+                    Field tickerField = ReflectionHelper.findField(Minecraft.class, "mcMusicTicker", "field_147126_aw");
+                    tickerField.setAccessible(true);
+                    Field modifiersField = Field.class.getDeclaredField("modifiers");
+                    modifiersField.setAccessible(true);
+                    modifiersField.setInt(tickerField, tickerField.getModifiers() & ~Modifier.FINAL);
+                    tickerField.set(mc, new Music(mc));
+                } catch (NoSuchFieldException | IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
         //Leaves broken by hoes
@@ -74,37 +85,21 @@ public class LumisCore
     @Mod.Instance(MOD_ID)
     public static LumisCore INSTANCE;
 
-    public static Block testBlock;
-    public static Block trueBlock;
-    public static Block falseBlock;
-
     public static Block compostingDirt;
     public static Block compostedDirt;
 
     @EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
-        //Blocks
-        testBlock = new BlockBuilder()
-                .setName("Test Block")
-                .setMaterial(7)
-                .setSound(1)
-                .setTab(0)
-                .build();
-        trueBlock = new BlockBuilder()
-                .setName("True Block")
-                .setMaterial(7)
-                .setSound(1)
-                .setTab(0)
-                .setHarvestTool("shears")
-                .useToolEffectiveHandler(true)
-                .build();
-        falseBlock = new BlockBuilder()
-                .setName("False Block")
-                .setMaterial(7)
-                .setSound(1)
-                .setTab(0)
-                .build();
+    public void postInit(FMLPostInitializationEvent event) {
+        etFuturumInstalled = Loader.isModLoaded("etfuturum");
+    }
 
+    @EventHandler
+    public void preInit(FMLPreInitializationEvent event) {
+        //Config
+        config = Config.load();
+        config.save();
+
+        //Blocks
         compostingDirt = new BlockBuilder()
                 .setName("Composting Dirt")
                 .setMaterial(15)
@@ -164,10 +159,6 @@ public class LumisCore
                     }
                 })
                 .build();
-
-        GameRegistry.registerBlock(testBlock, "test_block");
-        GameRegistry.registerBlock(trueBlock, "true_block");
-        GameRegistry.registerBlock(falseBlock, "false_block");
 
         GameRegistry.registerBlock(compostingDirt, "composting_dirt");
         GameRegistry.registerBlock(compostedDirt, "composted_dirt");
