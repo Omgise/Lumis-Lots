@@ -1,6 +1,5 @@
 package com.lumi.lots.mixins.compat.EtFuturum;
 
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
@@ -10,7 +9,6 @@ import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-import com.lumi.lots.config.Config;
 import com.lumi.lots.LumisCore;
 
 @Mixin(BlockLiquid.class)
