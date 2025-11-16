@@ -143,4 +143,6 @@ Simply add this mod to your game's `mods` folder.
 - [x] Make inv movement not happen when typing
   - [x] Fix NEI 1.3.7 GTNH version
 - [x] Add config file
-- [ ] Make cobblestone generators make Et Futurum Requiem’s deepslate below Y=22
+- [x] Make cobblestone generators make Et Futurum Requiem’s deepslate below Y=22
+- [ ] Allow pasting from clipboard
+- [ ] Add map colours to blocks

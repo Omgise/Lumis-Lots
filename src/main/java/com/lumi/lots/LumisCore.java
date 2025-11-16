@@ -48,13 +48,12 @@ public class LumisCore
     private static final Logger logger = LogManager.getLogger(MOD_ID);
     public static Config config;
 
+    public boolean etFuturumInstalled;
+
     @EventHandler
     public void init(FMLInitializationEvent event) {
         System.out.println("Lumi says \"Hello Forge world!\"");
         logger.info("Lumi says \"Hello Forge world!\"");
-        //Config
-        config = Config.load();
-        config.save();
 
         if (event.getSide().isClient()) {
             if (config.invMovement) {
@@ -67,7 +66,6 @@ public class LumisCore
             if (config.displayTrackName) {
                 MinecraftForge.EVENT_BUS.register(new DisplayPlayingTrackName());
             }
-
 
             //No cooldown music
             if (!config.doMusicCooldown) {
@@ -88,19 +86,8 @@ public class LumisCore
         MinecraftForge.EVENT_BUS.register(new Leaves());
     }
 
-    @EventHandler
-    public void postInit(FMLPostInitializationEvent event) {
-        if (Loader.isModLoaded("NotEnoughItems") && Loader.isModLoaded("CodeChickenCore")) {
-            System.out.println("NEI & CCC installed!"); //Can check if mods are installed!
-        }
-    }
-
     @Mod.Instance(MOD_ID)
     public static LumisCore INSTANCE;
-
-    public static Block testBlock;
-    public static Block trueBlock;
-    public static Block falseBlock;
 
     public static Block compostingDirt;
     public static Block compostedDirt;
@@ -108,7 +95,16 @@ public class LumisCore
     public static Item ring;
 
     @EventHandler
+    public void postInit(FMLPostInitializationEvent event) {
+        etFuturumInstalled = Loader.isModLoaded("etfuturum");
+    }
+
+    @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        //Config
+        config = Config.load();
+        config.save();
+
         //Blocks
         compostingDirt = new BlockBuilder()
                 .setName("Composting Dirt")
@@ -169,10 +165,6 @@ public class LumisCore
                     }
                 })
                 .build();
-
-        GameRegistry.registerBlock(testBlock, "test_block");
-        GameRegistry.registerBlock(trueBlock, "true_block");
-        GameRegistry.registerBlock(falseBlock, "false_block");
 
         GameRegistry.registerBlock(compostingDirt, "composting_dirt");
         GameRegistry.registerBlock(compostedDirt, "composted_dirt");

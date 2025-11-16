@@ -10,6 +10,7 @@ public class Config {
     public boolean invMovement = true;
     public boolean displayTrackName = false;
     public boolean doMusicCooldown = false;
+    public int etFuturumDeepslateYLevel = 22;
 
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private static final File configFile = new File(String.format("config/%s.json", MOD_ID));
