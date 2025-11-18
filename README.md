@@ -1,6 +1,6 @@
 <div align="center"><center>
 
-<img src="https://raw.githubusercontent.com/lumilovesyou/Lumis-Lots/refs/heads/master/src/main/resources/icon.png" style="border-radius: 10px;">
+<img src="https://raw.githubusercontent.com/lumilovesyou/Lumis-Lots/refs/heads/master/src/main/resources/icon.png" style="border-radius: 10px;" alt="An error, red wool, and green wool block">
 
 # Lumi's Lots
 
@@ -11,34 +11,6 @@ Backports and reworks modern features while adding new features to 1.7.10.
 
 ## Features
 
-### Developer/Creative Features
-<ol>
-    <li>
-        <details>
-        <summary>Test Block</summary>
-        Used only for testing in development.<br>
-        ID: <code>lumis_lots:test_block</code> <br>
-        <img src="https://raw.githubusercontent.com/lumilovesyou/Lumis-Lots/refs/heads/master/readme/test_block.png">
-        </details>
-    </li>
-    <li>
-        <details>
-        <summary>True Block</summary>
-        Used only for testing in development.<br>
-        ID: <code>lumis_lots:true_block</code> <br>
-        <img src="https://raw.githubusercontent.com/lumilovesyou/Lumis-Lots/refs/heads/master/readme/true_block.png">
-        </details>
-    </li>
-    <li>
-        <details>
-        <summary>False Block</summary>
-        Used only for testing in development.<br>
-        ID: <code>lumis_lots:false_block</code><br>
-        <img src="https://raw.githubusercontent.com/lumilovesyou/Lumis-Lots/refs/heads/master/readme/false_block.png">
-        </details>
-    </li>
-</ol>
-
 ### Backported/Reworked Features
 <ol>
     <li>
@@ -46,7 +18,7 @@ Backports and reworks modern features while adding new features to 1.7.10.
         <summary>Composting Dirt</summary>
         Crafted from dirt and eight compostable items.<br>
         ID: <code>lumis_lots:composting_dirt</code> <br>
-        <img src="https://raw.githubusercontent.com/lumilovesyou/Lumis-Lots/refs/heads/master/readme/composting_dirt.png">
+        <img src="https://raw.githubusercontent.com/lumilovesyou/Lumis-Lots/refs/heads/master/readme/composting_dirt.png" alt="Darker dirt with green and brown spots">
         </details>
     </li>
     <li>
@@ -54,7 +26,7 @@ Backports and reworks modern features while adding new features to 1.7.10.
         <summary>Composted Dirt</summary>
         A result of letting composting dirt sit.<br>
         ID: <code>lumis_lots:composted_dirt</code> <br>
-        <img src="https://raw.githubusercontent.com/lumilovesyou/Lumis-Lots/refs/heads/master/readme/composted_dirt.png">
+        <img src="https://raw.githubusercontent.com/lumilovesyou/Lumis-Lots/refs/heads/master/readme/composted_dirt.png" alt="Darker dirt with white spots">
         </details>
     </li>
     <li>
@@ -82,7 +54,7 @@ Backports and reworks modern features while adding new features to 1.7.10.
     <li>
         <details>
         <summary>Deepslate Cobblestone Generators (<a href="https://modrinth.com/mod/etfuturum">EtFuturum</a> necessary)</summary>
-        Makes cobblestone/stone generators produce their deepslate equivalent at Y=22 and below.
+        Makes cobblestone/stone generators produce their deepslate equivalent at Y=22 and below
         </details>
     </li>
 </ol>
@@ -94,38 +66,38 @@ Composting dirt can be crafted by placing eight compostable items around a block
 <details>
 <summary>Compostable items</summary>
 <ul>
-<li>Apples,</li>
-<li>Baked Potatoes,</li>
-<li>Bread,</li>
-<li>Brown Mushrooms,</li>
-<li>Cacti,</li>
-<li>Eggs,</li>
-<li>Fish,</li>
-<li>Flowers,</li>
-<li>Grass,</li>
-<li>Hay Blocks,</li>
-<li>Leaves,</li>
-<li>Lily Pads,</li>
-<li>Melon Blocks,</li>
-<li>Melon Seeds,</li>
-<li>Melon Slices,</li>
-<li>Nether Wart,</li>
-<li>Potatoes,</li>
-<li>Pumpkins,</li>
-<li>Pumpkin Seeds,</li>
-<li>Raw Beefs,</li>
-<li>Raw Chickens,</li>
-<li>Raw Porkchops,</li>
-<li>Red Mushrooms,</li>
-<li>Rotten Flesh,</li>
-<li>Saplings,</li>
-<li>Sugar Cane,</li>
-<li>Vines,</li>
-<li>Wheat Seeds,</li>
+<li>Apples</li>
+<li>Baked Potatoes</li>
+<li>Bread</li>
+<li>Brown Mushrooms</li>
+<li>Cacti</li>
+<li>Eggs</li>
+<li>Fish</li>
+<li>Flowers</li>
+<li>Grass</li>
+<li>Hay Blocks</li>
+<li>Leaves</li>
+<li>Lily Pads</li>
+<li>Melon Blocks</li>
+<li>Melon Seeds</li>
+<li>Melon Slices</li>
+<li>Nether Wart</li>
+<li>Potatoes</li>
+<li>Pumpkins</li>
+<li>Pumpkin Seeds</li>
+<li>Raw Beefs</li>
+<li>Raw Chickens</li>
+<li>Raw Porkchops</li>
+<li>Red Mushrooms</li>
+<li>Rotten Flesh</li>
+<li>Saplings</li>
+<li>Sugar Cane</li>
+<li>Vines</li>
+<li>Wheat Seeds</li>
 <li>Wheat</li>
 </ul>
 </details>
 
 ## How to use
 
-Add this mod to your game's `mods` folder along with [Unimxins](https://modrinth.com/mod/unimixins/versions) 0.1.23 or greater.
+Add this mod to your game's `mods` folder along with [Unimixins](https://modrinth.com/mod/unimixins/versions) 0.1.23 or greater.
