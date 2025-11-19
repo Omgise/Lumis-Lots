@@ -15,7 +15,7 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.4.1"
+version = "1.5.0"
 group = "com.lumi.lots"
 archivesBaseName = "Lumis-Lots"
 
@@ -44,6 +44,14 @@ dependencies {
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+
+compileJava {
+    options.compilerArgs += [
+        "-AreobfSrgFile=${tasks.reobf.srg}",
+        "-AoutSrgFile=${buildDir}/tmp/mixins/mixins.srg",
+        "-AoutRefMapFile=${buildDir}/resources/main/mixins.lumislots.refmap.json"
+    ]
+}
 
 processResources {
     from(sourceSets.main.resources.srcDirs) {

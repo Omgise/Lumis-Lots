@@ -35,6 +35,12 @@ Backports and reworks modern features while adding new features to 1.7.10.
     Hoes now break leaves at various speeds depending on material level
     </details>
     </li>
+    <li>
+    <details>
+    <summary>Meta Key Copy/Pasting</summary>
+    You can now use the left and right meta key (⌘ on macOS) for copy, cutting, selecting all, and pasting
+    </details>
+    </li>
 </ol>
 
 ### New Features

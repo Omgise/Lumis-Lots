@@ -2,6 +2,7 @@ package com.lumi.lots.blocks;
 
 import com.lumi.lots.blocks.BlockDropsHandler.*;
 import com.lumi.lots.blocks.BlockToolHandler.*;
+import net.minecraft.block.material.MapColor;
 
 public class BlockBuilder {
     private int material = 0;
@@ -21,6 +22,7 @@ public class BlockBuilder {
     private ToolEffectiveHandler checkEffectiveToolHandler = null;
     private PlayerRelativeBlockHardnessHandler playerRelativeBlockHardnessHandler = null;
     private boolean useToolEffectiveHandler = false;
+    private MapColor mapColour = null;
 
     public BlockBuilder setMaterial(int material) {
         this.material = material;
@@ -107,7 +109,12 @@ public class BlockBuilder {
         return this;
     }
 
+    public BlockBuilder setMapColour(MapColor mapColour) {
+        this.mapColour = mapColour;
+        return this;
+    }
+
     public LumisBlocks build() {
-        return new LumisBlocks(material, name, hardness, resistance, harvestTool, harvestLevel, sound, tab, ticks, tickHandler, dropAmountFortuneHandler, dropAmountHandler, dropTypeHandler, dropMultipleItemsHandler, checkEffectiveToolHandler, playerRelativeBlockHardnessHandler, useToolEffectiveHandler);
+        return new LumisBlocks(material, name, hardness, resistance, harvestTool, harvestLevel, sound, tab, ticks, tickHandler, dropAmountFortuneHandler, dropAmountHandler, dropTypeHandler, dropMultipleItemsHandler, checkEffectiveToolHandler, playerRelativeBlockHardnessHandler, useToolEffectiveHandler, mapColour);
     }
 }

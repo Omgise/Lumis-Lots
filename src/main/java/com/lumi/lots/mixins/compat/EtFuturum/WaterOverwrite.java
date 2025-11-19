@@ -26,32 +26,16 @@ public abstract class WaterOverwrite extends BlockLiquid {
      * @reason Stone generators generate deepslate in EtFuturum
      */
     @Inject(
-            method = "updateTick", //func_149674_a
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/World;setBlock(IIILnet/minecraft/block/Block;)Z", //func_147449_b
-                    shift = At.Shift.AFTER
-            ),
-            cancellable = false
-    )
-    public void updateTick_dev(World w, int x, int y, int z, Random r, CallbackInfo c) {
-        updateTick(w, x, y, z);
-    }
-
-    @Inject(
             method = "func_149674_a",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/world/World;func_147449_b(IIILnet/minecraft/block/Block;)Z",
-                    shift = At.Shift.AFTER
+                    shift = At.Shift.AFTER,
+                    remap = false
             ),
-            cancellable = false
+            remap = false
     )
-    public void updateTick_prod(World w, int x, int y, int z, Random r, CallbackInfo c) {
-        updateTick(w, x, y, z);
-    }
-
-    public void updateTick(World world, int x, int y, int z) {
+    public void updateTick(World world, int x, int y, int z, Random rand, CallbackInfo ci) {
         if (world.getBlock(x, y - 1, z) == Blocks.stone) {
             if (y <= LumisCore.config.etFuturumDeepslateYLevel && LumisCore.INSTANCE.etFuturumInstalled) {
                 Block deepslate = GameRegistry.findBlock("etfuturum", "deepslate");

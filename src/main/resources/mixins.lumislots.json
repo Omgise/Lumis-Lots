@@ -1,12 +1,13 @@
 {
   "required": true,
   "minVersion": "0.6",
-  "package": "com.lumi.lots.mixins.compat.EtFuturum",
+  "package": "com.lumi.lots.mixins",
   "refmap": "mixins.lumislots.refmap.json",
   "target": "@env(DEFAULT)",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "LavaOverwrite",
-    "WaterOverwrite"
+    "compat.EtFuturum.LavaOverwrite",
+    "compat.EtFuturum.WaterOverwrite",
+    "gui.GuiTextField.PastingOverwrite"
   ]
 }

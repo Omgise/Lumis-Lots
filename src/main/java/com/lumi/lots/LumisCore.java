@@ -19,6 +19,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -64,7 +65,7 @@ public class LumisCore
             }
 
             //No cooldown music
-            if (!config.doMusicCooldown) {
+            if (!config.musicCooldown) {
                 Minecraft mc = Minecraft.getMinecraft();
                 try {
                     Field tickerField = ReflectionHelper.findField(Minecraft.class, "mcMusicTicker", "field_147126_aw");
@@ -109,6 +110,7 @@ public class LumisCore
                 .setHardness(0.5f)
                 .setHarvestTool("shovel")
                 .setTicking(true)
+                .setMapColour(MapColor.brownColor)
                 .setTickHandler(new BlockTickHandler() {
                     @Override
                     public void onTick(World world, int x, int y, int z, Random rand) {
@@ -147,6 +149,7 @@ public class LumisCore
                 .setResistance(0.5f)
                 .setHardness(0.5f)
                 .setHarvestTool("shovel")
+                .setMapColour(MapColor.woodColor)
                 .setDropMultipleItemsHandler(new DropMultiItemsHandler() {
                     @Override
                     public ArrayList<ItemStack> onGetMultiDropItems(World world, int x, int y, int z, int metadata, int fortune) {

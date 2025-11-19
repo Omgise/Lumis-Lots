@@ -1,6 +1,7 @@
 package com.lumi.lots.blocks;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,12 +24,13 @@ public class LumisBlocks extends Block {
     private ToolEffectiveHandler checkEffectiveToolHandler = null;
     private PlayerRelativeBlockHardnessHandler playerRelativeBlockHardnessHandler = null;
     private Boolean useToolEffectiveHandler;
+    private MapColor mapColour;
 
     private static final Material[] materials = {Material.air, Material.anvil, Material.cactus, Material.cake, Material.carpet, Material.circuits, Material.clay, Material.cloth, Material.coral, Material.craftedSnow, Material.dragonEgg, Material.fire, Material.glass, Material.gourd, Material.grass, Material.ground, Material.ice, Material.iron, Material.lava, Material.leaves, Material.packedIce, Material.piston, Material.plants, Material.portal, Material.redstoneLight, Material.rock, Material.sand, Material.snow, Material.sponge, Material.tnt, Material.vine, Material.water, Material.web, Material.wood};
     private static final SoundType[] sounds = {Block.soundTypeAnvil, Block.soundTypeCloth, Block.soundTypeGlass, Block.soundTypeGrass, Block.soundTypeGravel, Block.soundTypeLadder, Block.soundTypeMetal, Block.soundTypePiston, Block.soundTypeSand, Block.soundTypeSnow, Block.soundTypeStone, Block.soundTypeWood};
     private static final CreativeTabs[] tabs = {CreativeTabs.tabAllSearch, CreativeTabs.tabBlock, CreativeTabs.tabBrewing, CreativeTabs.tabCombat, CreativeTabs.tabDecorations, CreativeTabs.tabFood, CreativeTabs.tabInventory, CreativeTabs.tabMaterials, CreativeTabs.tabMisc, CreativeTabs.tabRedstone, CreativeTabs.tabTools, CreativeTabs.tabTransport};
 
-    public LumisBlocks(int material, String name, float hardness, float resistance, String harvestTool, int harvestLevel, int sound, int tab, boolean ticks, BlockTickHandler tickHandler, DropAmountFortuneHandler dropAmountFortuneHandler, DropAmountHandler dropAmountHandler, DropTypeHandler dropTypeHandler, DropMultiItemsHandler dropMultipleItemsHandler, ToolEffectiveHandler checkEffectiveToolHandler, PlayerRelativeBlockHardnessHandler playerRelativeBlockHardnessHandler, boolean useToolEffectiveHandler) {
+    public LumisBlocks(int material, String name, float hardness, float resistance, String harvestTool, int harvestLevel, int sound, int tab, boolean ticks, BlockTickHandler tickHandler, DropAmountFortuneHandler dropAmountFortuneHandler, DropAmountHandler dropAmountHandler, DropTypeHandler dropTypeHandler, DropMultiItemsHandler dropMultipleItemsHandler, ToolEffectiveHandler checkEffectiveToolHandler, PlayerRelativeBlockHardnessHandler playerRelativeBlockHardnessHandler, boolean useToolEffectiveHandler, MapColor mapColour) {
         super(materials[material]);
         name = name.toLowerCase().replace(" ", "_");
         this.setBlockName(name);
@@ -51,6 +53,7 @@ public class LumisBlocks extends Block {
         this.checkEffectiveToolHandler = checkEffectiveToolHandler;
         this.playerRelativeBlockHardnessHandler = playerRelativeBlockHardnessHandler;
         this.useToolEffectiveHandler = useToolEffectiveHandler;
+        this.mapColour = mapColour;
     }
 
     @Override
@@ -136,5 +139,14 @@ public class LumisBlocks extends Block {
          } else {
              return originalValue;
          }
+    }
+
+    @Override
+    public MapColor getMapColor(int p_149728_1_) {
+        if (mapColour != null) {
+            return mapColour;
+        } else {
+            return super.getMapColor(p_149728_1_);
+        }
     }
 }
