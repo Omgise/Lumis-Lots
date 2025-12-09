@@ -4,7 +4,7 @@
   "description": "Just things I deemed important enough to add.",
   "version": "${version}",
   "mcversion": "${mcversion}",
-  "url": "",
+  "url": "https://modrinth.com/mod/lumis-lots",
   "updateUrl": "",
   "authorList": ["LumiLovesYou"],
   "credits": "@makamys for the 1.7.10 template",

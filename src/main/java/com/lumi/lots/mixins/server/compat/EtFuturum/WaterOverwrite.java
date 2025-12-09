@@ -1,4 +1,4 @@
-package com.lumi.lots.mixins.compat.EtFuturum;
+package com.lumi.lots.mixins.server.compat.EtFuturum;
 
 import com.lumi.lots.LumisCore;
 import cpw.mods.fml.common.registry.GameRegistry;

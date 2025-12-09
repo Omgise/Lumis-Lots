@@ -1,4 +1,4 @@
-package com.lumi.lots.mixins.compat.EtFuturum;
+package com.lumi.lots.mixins.server.compat.EtFuturum;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;

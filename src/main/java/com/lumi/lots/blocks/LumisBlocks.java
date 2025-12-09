@@ -1,8 +1,14 @@
 package com.lumi.lots.blocks;
 
+import com.lumi.lots.blocks.BlockDropsHandler.DropAmountFortuneHandler;
+import com.lumi.lots.blocks.BlockDropsHandler.DropAmountHandler;
+import com.lumi.lots.blocks.BlockDropsHandler.DropMultiItemsHandler;
+import com.lumi.lots.blocks.BlockDropsHandler.DropTypeHandler;
+import com.lumi.lots.blocks.BlockPlaceHandler.OnBlockAddedHandler;
+import com.lumi.lots.blocks.BlockToolHandler.PlayerRelativeBlockHardnessHandler;
+import com.lumi.lots.blocks.BlockToolHandler.ToolEffectiveHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -12,25 +18,35 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.lumi.lots.blocks.BlockDropsHandler.*;
-import com.lumi.lots.blocks.BlockToolHandler.*;
+import static com.lumi.lots.LumisCore.tabs;
 
 public class LumisBlocks extends Block {
+    //Ticking values
     private final BlockTickHandler tickHandler;
+
+    //Drop values
     private final DropAmountFortuneHandler dropAmountFortuneHandler;
     private final DropAmountHandler dropAmountHandler;
     private final DropTypeHandler dropTypeHandler;
     private final DropMultiItemsHandler dropMultipleItemsHandler;
-    private ToolEffectiveHandler checkEffectiveToolHandler = null;
-    private PlayerRelativeBlockHardnessHandler playerRelativeBlockHardnessHandler = null;
-    private Boolean useToolEffectiveHandler;
-    private MapColor mapColour;
 
+    //Harvest values
+    private final ToolEffectiveHandler checkEffectiveToolHandler;
+    private final PlayerRelativeBlockHardnessHandler playerRelativeBlockHardnessHandler;
+    private final Boolean useToolEffectiveHandler;
+
+    //Place values
+    private final OnBlockAddedHandler onBlockAddedHandler;
+
+    //Colour values
+    private final MapColor mapColour;
+
+    //Static
     private static final Material[] materials = {Material.air, Material.anvil, Material.cactus, Material.cake, Material.carpet, Material.circuits, Material.clay, Material.cloth, Material.coral, Material.craftedSnow, Material.dragonEgg, Material.fire, Material.glass, Material.gourd, Material.grass, Material.ground, Material.ice, Material.iron, Material.lava, Material.leaves, Material.packedIce, Material.piston, Material.plants, Material.portal, Material.redstoneLight, Material.rock, Material.sand, Material.snow, Material.sponge, Material.tnt, Material.vine, Material.water, Material.web, Material.wood};
     private static final SoundType[] sounds = {Block.soundTypeAnvil, Block.soundTypeCloth, Block.soundTypeGlass, Block.soundTypeGrass, Block.soundTypeGravel, Block.soundTypeLadder, Block.soundTypeMetal, Block.soundTypePiston, Block.soundTypeSand, Block.soundTypeSnow, Block.soundTypeStone, Block.soundTypeWood};
-    private static final CreativeTabs[] tabs = {CreativeTabs.tabAllSearch, CreativeTabs.tabBlock, CreativeTabs.tabBrewing, CreativeTabs.tabCombat, CreativeTabs.tabDecorations, CreativeTabs.tabFood, CreativeTabs.tabInventory, CreativeTabs.tabMaterials, CreativeTabs.tabMisc, CreativeTabs.tabRedstone, CreativeTabs.tabTools, CreativeTabs.tabTransport};
 
-    public LumisBlocks(int material, String name, float hardness, float resistance, String harvestTool, int harvestLevel, int sound, int tab, boolean ticks, BlockTickHandler tickHandler, DropAmountFortuneHandler dropAmountFortuneHandler, DropAmountHandler dropAmountHandler, DropTypeHandler dropTypeHandler, DropMultiItemsHandler dropMultipleItemsHandler, ToolEffectiveHandler checkEffectiveToolHandler, PlayerRelativeBlockHardnessHandler playerRelativeBlockHardnessHandler, boolean useToolEffectiveHandler, MapColor mapColour) {
+    public LumisBlocks(int material, String name, float hardness, float resistance, String harvestTool, int harvestLevel, int sound, int creativeTab, boolean ticks, BlockTickHandler tickHandler, DropAmountFortuneHandler dropAmountFortuneHandler, DropAmountHandler dropAmountHandler, DropTypeHandler dropTypeHandler, DropMultiItemsHandler dropMultipleItemsHandler, ToolEffectiveHandler checkEffectiveToolHandler, PlayerRelativeBlockHardnessHandler playerRelativeBlockHardnessHandler, boolean useToolEffectiveHandler, OnBlockAddedHandler onBlockAddedHandler, MapColor mapColour) {
+        //Basic values
         super(materials[material]);
         name = name.toLowerCase().replace(" ", "_");
         this.setBlockName(name);
@@ -39,20 +55,31 @@ public class LumisBlocks extends Block {
         this.setResistance(resistance);
         this.setHarvestLevel(harvestTool, harvestLevel);
         this.setStepSound(sounds[sound]);
-        if (tab > -1) {
-            this.setCreativeTab(tabs[tab]);
+        if (creativeTab > -1) {
+            this.setCreativeTab(tabs[creativeTab]);
         }
+
+        //Ticking values
         if (ticks) {
             this.setTickRandomly(true);
         }
         this.tickHandler = tickHandler;
+
+        //Drop values
         this.dropAmountFortuneHandler = dropAmountFortuneHandler;
         this.dropAmountHandler = dropAmountHandler;
         this.dropTypeHandler = dropTypeHandler;
         this.dropMultipleItemsHandler = dropMultipleItemsHandler;
+
+        //Harvest values
         this.checkEffectiveToolHandler = checkEffectiveToolHandler;
         this.playerRelativeBlockHardnessHandler = playerRelativeBlockHardnessHandler;
         this.useToolEffectiveHandler = useToolEffectiveHandler;
+        this.onBlockAddedHandler = onBlockAddedHandler;
+
+        //Place values
+
+        //Colour values
         this.mapColour = mapColour;
     }
 
@@ -139,6 +166,15 @@ public class LumisBlocks extends Block {
          } else {
              return originalValue;
          }
+    }
+
+    @Override
+    public void onBlockAdded(World world, int x, int y, int z) {
+        if (onBlockAddedHandler != null) {
+            onBlockAddedHandler.onBlockAdded(world, x, y, z);
+        } else {
+            super.onBlockAdded(world, x, y, z);
+        }
     }
 
     @Override

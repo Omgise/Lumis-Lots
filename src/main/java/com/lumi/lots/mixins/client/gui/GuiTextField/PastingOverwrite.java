@@ -1,4 +1,4 @@
-package com.lumi.lots.mixins.gui.GuiTextField;
+package com.lumi.lots.mixins.client.gui.GuiTextField;
 
 import com.lumi.lots.LumisCore;
 import net.minecraft.client.gui.GuiScreen;
@@ -9,8 +9,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import com.lumi.lots.LumisCore.*;
 
 @Mixin(GuiTextField.class)
 public abstract class PastingOverwrite {

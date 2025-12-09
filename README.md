@@ -41,6 +41,12 @@ Backports and reworks modern features while adding new features to 1.7.10.
     You can now use the left and right meta key (⌘ on macOS) for copy, cutting, selecting all, and pasting
     </details>
     </li>
+    <li>
+    <details>
+    <summary>Sponge Functionality</summary>
+    Sponges can now be found in the creative inventory and have complete functionality (minus their furnace drying recipe, to be added). Not obtainable in survival yet
+    </details>
+    </li>
 </ol>
 
 ### New Features
@@ -55,6 +61,18 @@ Backports and reworks modern features while adding new features to 1.7.10.
         <details>
         <summary>No Music Cooldown</summary>
         Removes the cooldown between music tracks
+        </details>
+    </li>
+    <li>
+        <details>
+        <summary>Wither Bones</summary>
+        Dropped from wither skeletons and can be crafted into wither bonemeal
+        </details>
+    </li>
+    <li>
+        <details>
+        <summary>Wither Bonemeal</summary>
+        Crafted from wither bones and can be used to de-age plants, clear grass/flowers from an area, or turn plants into bushes
         </details>
     </li>
     <li>
@@ -104,6 +122,43 @@ Composting dirt can be crafted by placing eight compostable items around a block
 </ul>
 </details>
 
+### Wither Bones & Bonemeal
+When killed a wither skeleton will drop wither bones following the formula `Drop rate = Y + Looting level, Y ∈ {0, 1, 2, 3}`. These bones can be crafted into wither bonemeal. When used on a crop it will reverse the crop's stage, opposite to bonemeal. When placed upon the ground it will remove nearby grass and flower. Finally, if used upon a plant it will either turn it to a bush or in the case of tall grass turn it to short grass.
+
+Note: Eventually wither bonemeal will be useable as black dye
+
 ## How to use
 
 Add this mod to your game's `mods` folder along with [Unimixins](https://modrinth.com/mod/unimixins/versions) 0.1.23 or greater.
+
+## To-do
+- [ ] Rings
+    - [ ] Ring Slot
+    - [ ] Enchantments
+    - [ ] Recipes
+- [ ] Tickrate command
+    - [ ] Register command
+    - [ ] Speed up client + server tickrate
+- [ ] Find a fix to displaying the current music track's name
+- [ ] First person view
+    - [x] Hide player's hand
+    - [ ] Show body
+- [ ] Lapis needed for enchanting
+    - [ ] Add slot
+    - [ ] Add requirement enchant
+- [ ] Tooltip to show enchant when enchanting
+- [x] Make inv movement not happen when typing
+    - [x] Fix NEI 1.3.7 GTNH version
+- [x] Add config file
+- [x] Make cobblestone generators make Et Futurum Requiem’s deepslate below Y=22
+- [x] Allow pasting from clipboard
+- [x] Add map colours to blocks
+- [ ] Attempt cleaning up textbox focus code using `setFocused` from GuiTextField.java
+- [ ] Attempt cleaning up leaves overwrite using Mixins
+
+- [x] Organise mixins by client/server
+- [x] Recipe for wither bonemeal
+- [ ] Sponge drying recipe
+- [ ] Floating mobs biome (like from that scp short film)
+- [ ] Wither bonemeal as black dye
+- [ ] Wither bonemeal turns ferns to short ferns

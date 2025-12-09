@@ -45,6 +45,7 @@ colourList = [
 [112, 2, 0], #Netherrack
 ]
 
+
 path = "../src/main/resources/assets/lumis_lots/textures/blocks/"
 for (root, dirs, files) in os.walk(path):
     for file in files:
@@ -63,6 +64,7 @@ for (root, dirs, files) in os.walk(path):
 '''
 102 - [102, 76, 51] - composting_dirt.png
 50 - [104, 83, 50] - composted_dirt.png
+6 - [127, 178, 56] - wet_sponge.png
 38 - [183, 106, 47] - false_block.png
 6 - [127, 178, 56] - true_block.png
 '''

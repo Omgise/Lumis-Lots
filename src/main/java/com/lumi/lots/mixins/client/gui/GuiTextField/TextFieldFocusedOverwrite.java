@@ -1,5 +1,5 @@
 //Left unused because of creative mode menu issues
-package com.lumi.lots.mixins.gui.GuiTextField;
+package com.lumi.lots.mixins.client.gui.GuiTextField;
 
 import net.minecraft.client.gui.GuiTextField;
 import org.spongepowered.asm.mixin.Mixin;

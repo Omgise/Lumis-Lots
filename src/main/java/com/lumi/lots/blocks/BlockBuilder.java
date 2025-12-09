@@ -1,10 +1,16 @@
 package com.lumi.lots.blocks;
 
-import com.lumi.lots.blocks.BlockDropsHandler.*;
-import com.lumi.lots.blocks.BlockToolHandler.*;
+import com.lumi.lots.blocks.BlockDropsHandler.DropAmountFortuneHandler;
+import com.lumi.lots.blocks.BlockDropsHandler.DropAmountHandler;
+import com.lumi.lots.blocks.BlockDropsHandler.DropMultiItemsHandler;
+import com.lumi.lots.blocks.BlockDropsHandler.DropTypeHandler;
+import com.lumi.lots.blocks.BlockPlaceHandler.OnBlockAddedHandler;
+import com.lumi.lots.blocks.BlockToolHandler.PlayerRelativeBlockHardnessHandler;
+import com.lumi.lots.blocks.BlockToolHandler.ToolEffectiveHandler;
 import net.minecraft.block.material.MapColor;
 
 public class BlockBuilder {
+    //Basic values
     private int material = 0;
     private String name = "default_value";
     private float hardness = 1.0F;
@@ -12,16 +18,27 @@ public class BlockBuilder {
     private String harvestTool = "pickaxe";
     private int harvestLevel = 0;
     private int sound = 0;
-    private int tab = -1;
+    private int creativeTab = -1;
+
+    //Ticking Values
     private boolean ticks = false;
     private BlockTickHandler tickHandler = null;
+
+    //Drop values
     private DropAmountFortuneHandler dropAmountFortuneHandler = null;
     private DropAmountHandler dropAmountHandler = null;
     private DropTypeHandler dropTypeHandler = null;
     private DropMultiItemsHandler dropMultipleItemsHandler = null;
+
+    //Harvest values
     private ToolEffectiveHandler checkEffectiveToolHandler = null;
     private PlayerRelativeBlockHardnessHandler playerRelativeBlockHardnessHandler = null;
     private boolean useToolEffectiveHandler = false;
+
+    //Place values
+    private OnBlockAddedHandler onBlockAddedHandler = null;
+
+    //Colour values
     private MapColor mapColour = null;
 
     public BlockBuilder setMaterial(int material) {
@@ -39,6 +56,11 @@ public class BlockBuilder {
         return this;
     }
 
+    public BlockBuilder setResistance(float resistance) {
+        this.resistance = resistance;
+        return this;
+    }
+
     public BlockBuilder setHarvestTool(String harvestTool) {
         this.harvestTool = harvestTool;
         return this;
@@ -49,18 +71,13 @@ public class BlockBuilder {
         return this;
     }
 
-    public BlockBuilder setResistance(float resistance) {
-        this.resistance = resistance;
-        return this;
-    }
-
     public BlockBuilder setSound(int sound) {
         this.sound = sound;
         return this;
     }
 
-    public BlockBuilder setTab(int tab) {
-        this.tab = tab;
+    public BlockBuilder setCreativeTab(int creativeTab) {
+        this.creativeTab = creativeTab;
         return this;
     }
 
@@ -104,8 +121,13 @@ public class BlockBuilder {
         return this;
     }
 
-    public BlockBuilder useToolEffectiveHandler(boolean useToolEffectiveHandler) {
+    public BlockBuilder setUseToolEffectiveHandler(boolean useToolEffectiveHandler) {
         this.useToolEffectiveHandler = useToolEffectiveHandler;
+        return this;
+    }
+
+    public BlockBuilder setOnBlockAddedHandler(OnBlockAddedHandler onBlockAddedHandler) {
+        this.onBlockAddedHandler = onBlockAddedHandler;
         return this;
     }
 
@@ -115,6 +137,6 @@ public class BlockBuilder {
     }
 
     public LumisBlocks build() {
-        return new LumisBlocks(material, name, hardness, resistance, harvestTool, harvestLevel, sound, tab, ticks, tickHandler, dropAmountFortuneHandler, dropAmountHandler, dropTypeHandler, dropMultipleItemsHandler, checkEffectiveToolHandler, playerRelativeBlockHardnessHandler, useToolEffectiveHandler, mapColour);
+        return new LumisBlocks(material, name, hardness, resistance, harvestTool, harvestLevel, sound, creativeTab, ticks, tickHandler, dropAmountFortuneHandler, dropAmountHandler, dropTypeHandler, dropMultipleItemsHandler, checkEffectiveToolHandler, playerRelativeBlockHardnessHandler, useToolEffectiveHandler, onBlockAddedHandler, mapColour);
     }
 }

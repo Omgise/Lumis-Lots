@@ -7,10 +7,11 @@ import java.io.*;
 import static com.lumi.lots.LumisCore.MOD_ID;
 
 public class Config {
-    public boolean invMovement = true;
     public boolean displayTrackName = false;
+    public boolean invMovement = true;
     public boolean musicCooldown = false;
     public boolean metaKeyPasting = true;
+    public boolean firstPersonModel = false;
     public int etFuturumDeepslateYLevel = 22;
 
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();

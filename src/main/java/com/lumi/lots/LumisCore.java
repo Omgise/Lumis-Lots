@@ -4,11 +4,14 @@ import com.lumi.lots.audio.music.DisplayPlayingTrackName;
 import com.lumi.lots.audio.music.overwrite.Music;
 import com.lumi.lots.blocks.BlockBuilder;
 import com.lumi.lots.blocks.BlockDropsHandler.DropMultiItemsHandler;
+import com.lumi.lots.blocks.BlockPlaceHandler.OnBlockAddedHandler;
 import com.lumi.lots.blocks.BlockTickHandler;
 import com.lumi.lots.blocks.overwrite.Leaves;
 import com.lumi.lots.config.Config;
 import com.lumi.lots.gui.MovementHandler;
 import com.lumi.lots.gui.TextFieldFocusChecks.TextFieldFocus;
+import com.lumi.lots.items.ItemBuilder;
+import com.lumi.lots.items.ItemUseHandler.OnItemUseHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
@@ -20,15 +23,20 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.play.server.S2APacketParticles;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -37,15 +45,21 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static com.lumi.lots.items.wither_bonemeal.reverseBonemealFunction.reverseBonemeal;
+
 @Mod(modid = LumisCore.MOD_ID, version = LumisCore.MOD_VERSION)
 public class LumisCore
 {
+    //Setup stuffs
     public static final String MOD_ID = "lumis_lots";
     public static final String MOD_VERSION = "@VERSION@";
     private static final Logger logger = LogManager.getLogger(MOD_ID);
     public static Config config;
 
+    //Shared variables
+    public static Random lumiRand = new Random();
     public boolean etFuturumInstalled;
+    public static final CreativeTabs[] tabs = {CreativeTabs.tabAllSearch, CreativeTabs.tabBlock, CreativeTabs.tabBrewing, CreativeTabs.tabCombat, CreativeTabs.tabDecorations, CreativeTabs.tabFood, CreativeTabs.tabInventory, CreativeTabs.tabMaterials, CreativeTabs.tabMisc, CreativeTabs.tabRedstone, CreativeTabs.tabTools, CreativeTabs.tabTransport};
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
@@ -78,6 +92,17 @@ public class LumisCore
                     throw new RuntimeException(e);
                 }
             }
+
+            try {
+                Block sponge = Blocks.sponge;
+                sponge.setHarvestLevel("shears", 0);
+                sponge.setCreativeTab(tabs[1]);
+                sponge.setResistance(0.6f);
+                sponge.setStepSound(Block.soundTypeCloth);
+            } catch (Exception e) {
+                logger.error("Lumi says \"Failed to modify sponge!\"");
+                throw new RuntimeException(e);
+            }
         }
         //Leaves broken by hoes
         MinecraftForge.EVENT_BUS.register(new Leaves());
@@ -88,6 +113,10 @@ public class LumisCore
 
     public static Block compostingDirt;
     public static Block compostedDirt;
+    public static Block wetSponge;
+
+    public static Item witherBone;
+    public static Item witherBonemeal;
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
@@ -105,7 +134,7 @@ public class LumisCore
                 .setName("Composting Dirt")
                 .setMaterial(15)
                 .setSound(4)
-                .setTab(4)
+                .setCreativeTab(4)
                 .setResistance(0.5f)
                 .setHardness(0.5f)
                 .setHarvestTool("shovel")
@@ -145,7 +174,7 @@ public class LumisCore
                 .setName("Composted Dirt")
                 .setMaterial(15)
                 .setSound(3)
-                .setTab(4)
+                .setCreativeTab(4)
                 .setResistance(0.5f)
                 .setHardness(0.5f)
                 .setHarvestTool("shovel")
@@ -163,8 +192,75 @@ public class LumisCore
                 })
                 .build();
 
+        wetSponge = new BlockBuilder()
+                .setName("Wet Sponge")
+                .setMaterial(8)
+                .setSound(1)
+                .setCreativeTab(8)
+                .setResistance(0.6f)
+                .setHardness(0.6f)
+                .setHarvestTool("shears")
+                .setMapColour(MapColor.greenColor)
+                .setOnBlockAddedHandler(new OnBlockAddedHandler() {
+                    @Override
+                    public void onBlockAdded(World world, int x, int y, int z) {
+                        if (world.provider.isHellWorld) {
+                            world.setBlock(x, y, z, Blocks.sponge);
+                            world.playAuxSFX(2007, x, y, z, 0);
+                        }
+                    }
+                })
+                .build();
+
         GameRegistry.registerBlock(compostingDirt, "composting_dirt");
         GameRegistry.registerBlock(compostedDirt, "composted_dirt");
+        GameRegistry.registerBlock(wetSponge, "wet_sponge");
+
+        witherBone = new ItemBuilder()
+                .setName("Wither Bone")
+                .setCreativeTab(8)
+                .build();
+
+        witherBonemeal = new ItemBuilder()
+                .setName("Wither Bonemeal")
+                .setCreativeTab(7)
+                .setItemUseHandler(new OnItemUseHandler() {
+                    @Override
+                    public boolean onItemUse(ItemStack item, EntityPlayer player, World world, int x, int y, int z, int p_77648_7_, float p_77648_8_, float p_77648_9_, float p_77648_10_) {
+                        if (!player.canPlayerEdit(x, y, z, p_77648_7_, item)) return false;
+                        if (reverseBonemeal(item, world, x, y, z, player)) {
+                            if (world.isRemote) {
+                                Block block = world.getBlock(x, y, z);
+
+                                if (block.getMaterial() != Material.air) {
+                                    block.setBlockBoundsBasedOnState(world, x, y, z);
+
+                                    for (int i1 = 0; i1 < 15; ++i1) {
+                                        double d0 = lumiRand.nextGaussian() * 0.02D;
+                                        double d1 = lumiRand.nextGaussian() * 0.02D;
+                                        double d2 = lumiRand.nextGaussian() * 0.02D;
+                                        world.spawnParticle("witchMagic", ((float)x + lumiRand.nextFloat()), (double)y + (double)lumiRand.nextFloat() * block.getBlockBoundsMaxY(), ((float)z + lumiRand.nextFloat()), d0, d1, d2);
+                                    }
+                                }
+                                else {
+                                    for (int i1 = 0; i1 < 15; ++i1) {
+                                        double d0 = lumiRand.nextGaussian() * 0.02D;
+                                        double d1 = lumiRand.nextGaussian() * 0.02D;
+                                        double d2 = lumiRand.nextGaussian() * 0.02D;
+                                        world.spawnParticle("witchMagic", ((float)x + lumiRand.nextFloat()), (double)y + (double)lumiRand.nextFloat() * 1.0f, ((float)z + lumiRand.nextFloat()), d0, d1, d2);
+                                    }
+                                }
+                            }
+
+                            return true;
+                        }
+                        return false;
+                    }
+                })
+                .build();
+
+        GameRegistry.registerItem(witherBone, "wither_bone");
+        GameRegistry.registerItem(witherBonemeal, "wither_bonemeal");
 
         //Tags
         Block[] compostableBlocks = {Blocks.pumpkin, Blocks.melon_block, Blocks.cactus, Blocks.hay_block, Blocks.vine, Blocks.waterlily, Blocks.red_mushroom, Blocks.brown_mushroom, Blocks.yellow_flower};
@@ -199,6 +295,12 @@ public class LumisCore
                 "AAA", "ABA", "AAA",
                 'A', "compostable",
                 'B', Blocks.dirt
+        ));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(
+                new ItemStack(witherBonemeal, 2),
+                new Object[] {
+                    witherBone
+                }
         ));
     }
 }
